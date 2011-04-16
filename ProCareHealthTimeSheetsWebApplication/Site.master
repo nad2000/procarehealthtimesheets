@@ -1,0 +1,57 @@
+﻿<%@ Master Language="C#" CodeBehind="Site.master.cs" Inherits="SoftwareAssociates.ProCareHealth.Site" AutoEventWireup="True" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head runat="server">
+    <title>ProCare Health Timesheets</title>
+    <link href="Styles/AJAXTkStyleSheet.css" rel="stylesheet" type="text/css" />
+    <link href="Styles/Site.css" rel="stylesheet" type="text/css" />
+    <asp:ContentPlaceHolder id="HeadContent" runat="server" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <asp:ScriptManager ID="MainScriptManager" runat="server" EnablePartialRendering="false" EnableCdn="true"/>
+    <div class="page">
+        <div class="header">
+            <div class="title">
+                <h1><asp:Label ID="TitleLabel" runat="server" Text="ProCare Health Timesheets"></asp:Label></h1>
+            </div>
+            <div class="loginDisplay">
+                <asp:LoginView ID="HeadLoginView" runat="server" EnableViewState="false">
+                    <AnonymousTemplate>
+                        [ <a href="~/Account/Login.aspx" ID="HeadLoginStatus" runat="server">Log In</a> ]
+                    </AnonymousTemplate>
+                    <LoggedInTemplate>
+                        <span class="bold">
+                        <asp:Label ID="UserFullNameLabel" runat="server"><%= ( this.UserDetails != null ? this.UserDetails.FullName : "" )%></asp:Label>
+                        (<asp:LoginName ID="HeadLoginName" runat="server" />)</span>
+                        [ <asp:LoginStatus ID="HeadLoginStatus" runat="server" LogoutAction="Redirect" LogoutText="Log Out" LogoutPageUrl="~/"/> ]
+                    </LoggedInTemplate>
+                </asp:LoginView>
+            </div>
+            <div class="clear hideSkiplink">
+                <asp:SiteMapDataSource ID="NavigationSiteMapDataSource" runat="server"  ShowStartingNode="False" />
+                <asp:Menu ID="NavigationMenu" runat="server" CssClass="menu" 
+                    EnableViewState="false" IncludeStyleBlock="false" Orientation="Horizontal" 
+                    DataSourceID="NavigationSiteMapDataSource">
+                </asp:Menu>
+            </div>
+        </div>
+
+        <div class="main">
+        <%-- TODO: Enable partial rendering by setting the EnablePartialRendering attribute to "true" to provide a smoother browsing experience.
+             Leaving partial rendering disabled will provide a better debugging experience while the application is in development. --%>
+            <%-- asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="false"/ --%>
+            <asp:ContentPlaceHolder ID="MainContent" runat="server" 
+                onload="MainContent_Load"/>
+           </div>
+        <div class="clear">
+        </div>
+    </div>
+
+    <div class="footer">
+    </div>
+
+    </form>
+</body>
+</html>

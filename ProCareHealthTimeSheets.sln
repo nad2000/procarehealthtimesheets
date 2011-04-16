@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCareHealthTimeSheetsWebApplication", "ProCareHealthTimeSheetsWebApplication\ProCareHealthTimeSheetsWebApplication.csproj", "{0795798A-F214-4D02-85DA-34DEE57CED44}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCareHealthTimeSheetsLib", "ProCareHealthTimeSheetsLib\ProCareHealthTimeSheetsLib.csproj", "{D8A8F8DD-B426-4C3B-83DE-A338D7621D76}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0795798A-F214-4D02-85DA-34DEE57CED44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0795798A-F214-4D02-85DA-34DEE57CED44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0795798A-F214-4D02-85DA-34DEE57CED44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0795798A-F214-4D02-85DA-34DEE57CED44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D8A8F8DD-B426-4C3B-83DE-A338D7621D76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D8A8F8DD-B426-4C3B-83DE-A338D7621D76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D8A8F8DD-B426-4C3B-83DE-A338D7621D76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D8A8F8DD-B426-4C3B-83DE-A338D7621D76}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

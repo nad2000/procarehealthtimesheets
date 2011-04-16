@@ -1,0 +1,232 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TimeSheetDB" Class="WorkSheetDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=TimeSheetDB;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="SoftwareAssociates.ProCareHealth.Properties.Settings" SettingsPropertyName="MainSqlConnection" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.WeekDays" Member="WeekDays">
+    <Type Name="WeekDay">
+      <Column Name="WeekDay" Member="WeekDay1" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="CurrentWeekDayDate" Type="System.DateTime" DbType="Date" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="WeekDayName" Type="System.String" DbType="NVarChar(30)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Companies" Member="Companies">
+    <Type Name="Company">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Company_UserCompany" Member="UserCompanies" ThisKey="Id" OtherKey="Companies_Id" Type="UserCompany" />
+      <Association Name="Company_User" Member="Users" ThisKey="Id" OtherKey="CompanyWorkingFor_Id" Type="User" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserCompany" Member="UserCompanies">
+    <Type Name="UserCompany">
+      <Column Name="UsersVerifyingTimeSheets_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Companies_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Company_UserCompany" Member="Company" ThisKey="Companies_Id" OtherKey="Id" Type="Company" IsForeignKey="true" />
+      <Association Name="User_UserCompany" Member="User" ThisKey="UsersVerifyingTimeSheets_Id" OtherKey="Id" Type="User" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyWorkingFor_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Surname" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(201)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="User_UserCompany" Member="UserCompanies" ThisKey="Id" OtherKey="UsersVerifyingTimeSheets_Id" Type="UserCompany" />
+      <Association Name="User_TimeSheetEntry" Member="TimeSheetEntries" ThisKey="Id" OtherKey="VerifiedBy_Id" Type="TimeSheetEntry" />
+      <Association Name="User_TimeSheetEntry1" Member="TimeSheetEntries1" ThisKey="Id" OtherKey="ReportedBy_Id" Type="TimeSheetEntry" />
+      <Association Name="Company_User" Member="Company" ThisKey="CompanyWorkingFor_Id" OtherKey="Id" Type="Company" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TimeSheetEntries" Member="TimeSheetEntries">
+    <Type Name="TimeSheetEntry">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="StartedAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="EndedAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Break_Id" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="ReportedBy_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VerifiedBy_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BreakLength" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="TotalTime" Type="System.Int32" DbType="Int" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="User_TimeSheetEntry" Member="User" ThisKey="VerifiedBy_Id" OtherKey="Id" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="User_TimeSheetEntry1" Member="User1" ThisKey="ReportedBy_Id" OtherKey="Id" Type="User" IsForeignKey="true" />
+      <Association Name="BreakType_TimeSheetEntry" Member="BreakType" ThisKey="Break_Id" OtherKey="Id" Type="BreakType" IsForeignKey="true" DeleteRule="SET NULL" />
+    </Type>
+  </Table>
+  <Table Name="dbo.BreakTypes" Member="BreakTypes">
+    <Type Name="BreakType">
+      <Column Name="Id" Type="System.Int16" DbType="SmallInt NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="AlternateCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TimeValue" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="BreakType_TimeSheetEntry" Member="TimeSheetEntries" ThisKey="Id" OtherKey="Break_Id" Type="TimeSheetEntry" />
+    </Type>
+  </Table>
+  <Function Name="dbo.UserWeekTimeSheetEntriesGet" Method="UserWeekTimeSheetEntriesGet">
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.GetUserTimeSheetEntries" Method="GetUserTimeSheetEntries">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <Parameter Name="WeekEndingDate" Parameter="weekEndingDate" Type="System.DateTime" DbType="Date" />
+    <ElementType Name="GetUserTimeSheetEntriesResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="StartedAt" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="EndedAt" Type="System.TimeSpan" DbType="Time" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TotalTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Break_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BreakName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="ReportedBy_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VerifiedBy_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetWeekEndingDates" Method="GetWeekEndingDates">
+    <Parameter Name="Count" Parameter="count" Type="System.Byte" DbType="TinyInt" />
+    <ElementType Name="GetWeekEndingDatesResult">
+      <Column Name="WeekEndingDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.UserTimeSheetEntry_Update" Method="UserTimeSheetEntry_Update">
+    <Parameter Name="Id" Parameter="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Date" Parameter="date" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="StartedAt" Parameter="startedAt" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="EndedAt" Parameter="endedAt" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="Break_Id" Parameter="break_Id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ReportedBy_Id" Parameter="reportedBy_Id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="UserTimeSheetEntry_UpdateResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="StartedAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="EndedAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Break_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ReportedBy_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VerifiedBy_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BreakLength" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="TotalTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.WeekEndingDates" Method="WeekEndingDates" IsComposable="true">
+    <Parameter Name="Count" Parameter="count" Type="System.Byte" DbType="TinyInt" />
+    <ElementType Name="WeekEndingDatesResult">
+      <Column Name="WeekEndingDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetSummaryReport" Method="GetSummaryReport">
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <ElementType Name="GetSummaryReportResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ApprovedTotalTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NotApprovedTotalTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedTotalBreakTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NotApprovedTotalBreakTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetTimeSheetSummary" Method="GetTimeSheetSummary">
+    <Parameter Name="ReportRequestedBy_Id" Parameter="reportRequestedBy_Id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <ElementType Name="GetTimeSheetSummaryResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="StartDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="EndDate" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ApprovedTotalTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NotApprovedTotalTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ApprovedTotalBreakTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="NotApprovedTotalBreakTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Comments" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ThisWeekEndingDate" Method="ThisWeekEndingDate" IsComposable="true">
+    <Return Type="System.DateTime" />
+  </Function>
+  <Function Name="dbo.LastWeekEndingDate" Method="LastWeekEndingDate" IsComposable="true">
+    <Return Type="System.DateTime" />
+  </Function>
+  <Function Name="dbo.GetFullTimeSheetRecords" Method="GetFullTimeSheetRecords">
+    <Parameter Name="ReportRequestedBy_Id" Parameter="reportRequestedBy_Id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="DateFrom" Parameter="dateFrom" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="DateTo" Parameter="dateTo" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="IncludeUnapproved" Parameter="includeUnapproved" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="CompanyId" Parameter="companyId" Type="System.Int32" DbType="Int" />
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <ElementType Name="GetFullTimeSheetRecordsResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="UserId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(201)" CanBeNull="true" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="StartedAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="EndedAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="Break_Id" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="BreakTypeName" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetUserDataByUserName" Method="GetUserDataByUserName">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <ElementType Name="GetUserDataByUserNameResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Code" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Surname" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(201)" CanBeNull="true" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="CompanyCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
+      <Column Name="CompanyName" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.GetApprovableUsers" Method="GetApprovableUsers">
+    <Parameter Name="UserName" Parameter="userName" Type="System.String" DbType="NVarChar(256)" />
+    <ElementType Name="GetApprovableUsersResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(201)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.ApproverTimeSheetEntry_Update" Method="ApproverTimeSheetEntry_Update">
+    <Parameter Name="Id" Parameter="id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Date" Parameter="date" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="StartedAt" Parameter="startedAt" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="EndedAt" Parameter="endedAt" Type="System.TimeSpan" DbType="Time" />
+    <Parameter Name="Break_Id" Parameter="break_Id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="IsApproved" Parameter="isApproved" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="Comment" Parameter="comment" Type="System.String" DbType="NVarChar(MAX)" />
+    <Parameter Name="VerifiedBy_Id" Parameter="verifiedBy_Id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ReportedBy_UserName" Parameter="reportedBy_UserName" Type="System.String" DbType="NVarChar(256)" />
+    <ElementType Name="ApproverTimeSheetEntry_UpdateResult">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Date" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="StartedAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="EndedAt" Type="System.TimeSpan" DbType="Time NOT NULL" CanBeNull="false" />
+      <Column Name="IsApproved" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Comment" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Break_Id" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="ReportedBy_Id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="VerifiedBy_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="BreakLength" Type="System.Int16" DbType="SmallInt" CanBeNull="true" />
+      <Column Name="TotalTime" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+</Database>
