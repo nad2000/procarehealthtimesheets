@@ -1,0 +1,23 @@
+# use glob syntax.
+syntax: glob
+
+*.elc
+*.pyc
+*~
+*.bak
+output*
+*.exe
+dist*
+build*
+Setup.7z
+*.log
+*.zip
+ProCareHealthTimeSheetsWebApplication\bin
+ProCareHealthTimeSheetsWebApplication\obj
+ProCareHealthTimeSheetsLib\bin
+ProCareHealthTimeSheetsLib\obj
+\.orig\..*$
+\.orig$
+\.chg\..*$
+\.rej$
+\.conflict\~$

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+    <siteMapNode title="Root" roles="*" url="~/Default.aspx" description="Home">
+        <siteMapNode url="~/FillingIn.aspx" title="Fill-In"  description="Filling-in the timesheets"
+					 roles="Employees"/>
+        <siteMapNode url="~/Approving3.aspx" title="Approve"  description="Approving the reported time"
+					roles="Approvers"/>
+		<siteMapNode url="~/FullReport.aspx" roles="Approvers" title="Report" description="Summary about reported and approved time" />
+		<siteMapNode url="~/Admin/Admin.aspx"
+					 roles="Administrators"
+					 title="User Administration"
+					 description="User Administration" />
+		<siteMapNode url="~/Account/ChangePassword.aspx"
+					 users="*" roles="Employees,Administrators,Approvers"
+					 title="Account"
+					 description="User Account" />
+		
+	</siteMapNode>
+</siteMap>
