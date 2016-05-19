@@ -1,7 +1,7 @@
 USE TimeSheetDB
 GO
 -- EXEC dbo.changeAppUserPwd 'GrahamF'
---  CREATE PROC dbo.changeAppUserPwd AS 
+-- CREATE PROC dbo.changeAppUserPwd AS 
 ALTER PROCEDURE dbo.changeAppUserPwd
   @UserName nvarchar(256),
   @ClearTextPassword nvarchar(128) = '1234567',

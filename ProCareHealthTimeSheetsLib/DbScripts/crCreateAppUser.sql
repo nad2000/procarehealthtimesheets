@@ -1,10 +1,13 @@
 USE TimeSheetDB
 GO
 
+-- Need to create membership DB: https://msdn.microsoft.com/en-us/library/x28wfk74.aspx
+-- E.g.: c:\Windows\Microsoft.NET\Framework\v4.0.30319\aspnet_regsql.exe  -C "Data Source=(LocalDB)\MSSQLLocalDB;Integrated Security=True;Connect Timeout=30;Initial Catalog=TimeSheetDB"  -A all
 IF EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[createAppUser]') AND type in (N'P', N'PC'))
   DROP PROC dbo.createAppUser
 GO
 
+-- TEST: EXECUTE dbo.createAppUser 'nad2000', '12345'
 CREATE PROCEDURE dbo.createAppUser
   @UserName nvarchar(256),
   @ClearTextPassword nvarchar(128) = '1234567',

@@ -2,6 +2,9 @@ USE [TimeSheetDB]
 GO
 /*
 
+CREATE TABLE dbo.Users (
+	Id 
+
 ALTER TABLE dbo.Users ADD
 LoweredUserName AS LOWER(UserName)
 -- NVARCHAR(256) 

@@ -28,6 +28,7 @@ CREATE UNIQUE NONCLUSTERED INDEX [IX_BreakTypesTimeSheetEntry_Date]
 ON [dbo].[TimeSheetEntries] (  ReportedBy_Id, [Date] ASC )
 GO
 
+-- CREATE PROCEDURE dbo.GetUserTimeSheetEntries AS 
 ALTER PROCEDURE dbo.GetUserTimeSheetEntries (
 	@UserName NVARCHAR(256), --  @UserId SQL_VARIANT, -- INT (Id) or VARCHAR (UserName)
 	@WeekEndingDate DATE = NULL )

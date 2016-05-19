@@ -100,6 +100,29 @@
   <ItemGroup>
     <Content Include="DbScripts\BreakTypesData.sql" />
     <Content Include="DbScripts\CompaniesTestData.sql" />
+    <Content Include="DbScripts\crApproverTimeSheetEntry_Update.sql" />
+    <Content Include="DbScripts\crBase64.sql" />
+    <Content Include="DbScripts\crBreakTypes.sql" />
+    <Content Include="DbScripts\crChangeAppUserPwd.sql" />
+    <Content Include="DbScripts\crCreateAppUser.sql" />
+    <Content Include="DbScripts\crGetAllUsers.sql" />
+    <Content Include="DbScripts\crGetApprovableUsers.sql" />
+    <Content Include="DbScripts\crGetFullTimeSheetRecords.sql" />
+    <Content Include="DbScripts\crGetTimeSheetSummary.sql" />
+    <Content Include="DbScripts\crGetUserDataByUserName.sql" />
+    <Content Include="DbScripts\crGetUserTimeSheetEntries.sql" />
+    <Content Include="DbScripts\crSplitFunction.sql" />
+    <Content Include="DbScripts\crTimeSheetEntries.sql" />
+    <Content Include="DbScripts\crTimeSheetEntries_UpdateTotalTime_TR.sql" />
+    <Content Include="DbScripts\crToNZDateTime.sql" />
+    <Content Include="DbScripts\crUserIdByName.sql" />
+    <Content Include="DbScripts\crUserTimeSheetEntry_Update.sql" />
+    <Content Include="DbScripts\crUser_Select.sql" />
+    <Content Include="DbScripts\crWeekDays.sql" />
+    <Content Include="DbScripts\crWeekEndingDates.sql" />
+    <Content Include="DbScripts\deleteTestUsers.sql" />
+    <Content Include="DbScripts\genRandomText.sql" />
+    <Content Include="DbScripts\genTestTimeSheetData.sql" />
     <Content Include="DbScripts\UsersTestData.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
