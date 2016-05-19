@@ -1,0 +1,51 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Fortran module files
+*.mod
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+*.lib
+
+# Executables
+*.exe
+*.out
+*.app
+
+
+####
+*.elc
+*.pyc
+*~
+*.bak
+output*
+*.exe
+dist*
+build*
+Setup.7z
+*.log
+*.zip
+ProCareHealthTimeSheetsWebApplication\bin
+ProCareHealthTimeSheetsWebApplication\obj
+ProCareHealthTimeSheetsLib\bin
+ProCareHealthTimeSheetsLib\obj
+\.orig\..*$
+\.orig$
+\.chg\..*$
+\.rej$
+\.conflict\~$
