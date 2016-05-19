@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCareHealthTimeSheetsWebApplication", "ProCareHealthTimeSheetsWebApplication\ProCareHealthTimeSheetsWebApplication.csproj", "{0795798A-F214-4D02-85DA-34DEE57CED44}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProCareHealthTimeSheetsLib", "ProCareHealthTimeSheetsLib\ProCareHealthTimeSheetsLib.csproj", "{D8A8F8DD-B426-4C3B-83DE-A338D7621D76}"
