@@ -23,7 +23,7 @@ namespace SoftwareAssociates.ProCareHealth.Web.UI
 
         private string _userCode;
         private string _userFirstName;
-        private string _userSurname;
+        private string _userLastName;
         private string _userFullName;
         private Nullable<int> _userId;
         private string _userCompanyCode;
@@ -94,7 +94,7 @@ namespace SoftwareAssociates.ProCareHealth.Web.UI
             this._userCode = userDetails.Code;
             this._userFullName = userDetails.FullName;
             this._userFirstName = userDetails.FirstName;
-            this._userSurname = userDetails.Surname;
+            this._userLastName = userDetails.LastName;
             this._userId = userDetails.Id;
             this._userCompanyCode = userDetails.CompanyCode;
             this._userCompanyName = userDetails.CompanyName;

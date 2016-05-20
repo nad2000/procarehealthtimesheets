@@ -681,7 +681,7 @@ namespace SoftwareAssociates.ProCareHealth
 		
 		private string _FirstName;
 		
-		private string _Surname;
+		private string _LastName;
 		
 		private string _FullName;
 		
@@ -711,8 +711,8 @@ namespace SoftwareAssociates.ProCareHealth
     partial void OnCodeChanged();
     partial void OnFirstNameChanging(string value);
     partial void OnFirstNameChanged();
-    partial void OnSurnameChanging(string value);
-    partial void OnSurnameChanged();
+    partial void OnLastNameChanging(string value);
+    partial void OnLastNameChanged();
     partial void OnFullNameChanging(string value);
     partial void OnFullNameChanged();
     #endregion
@@ -870,22 +870,22 @@ namespace SoftwareAssociates.ProCareHealth
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Surname", DbType="NVarChar(100)")]
-		public string Surname
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(100)")]
+		public string LastName
 		{
 			get
 			{
-				return this._Surname;
+				return this._LastName;
 			}
 			set
 			{
-				if ((this._Surname != value))
+				if ((this._LastName != value))
 				{
-					this.OnSurnameChanging(value);
+					this.OnLastNameChanging(value);
 					this.SendPropertyChanging();
-					this._Surname = value;
-					this.SendPropertyChanged("Surname");
-					this.OnSurnameChanged();
+					this._LastName = value;
+					this.SendPropertyChanged("LastName");
+					this.OnLastNameChanged();
 				}
 			}
 		}
@@ -2672,7 +2672,7 @@ namespace SoftwareAssociates.ProCareHealth
 		
 		private string _FirstName;
 		
-		private string _Surname;
+		private string _LastName;
 		
 		private string _FullName;
 		
@@ -2750,18 +2750,18 @@ namespace SoftwareAssociates.ProCareHealth
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_Surname", DbType="NVarChar(100)")]
-		public string Surname
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_LastName", DbType="NVarChar(100)")]
+		public string LastName
 		{
 			get
 			{
-				return this._Surname;
+				return this._LastName;
 			}
 			set
 			{
-				if ((this._Surname != value))
+				if ((this._LastName != value))
 				{
-					this._Surname = value;
+					this._LastName = value;
 				}
 			}
 		}

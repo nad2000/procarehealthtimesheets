@@ -33,7 +33,7 @@
       <Column Name="LoweredUserName" Type="System.String" DbType="NVarChar(256)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="Code" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="FirstName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="Surname" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="FullName" Type="System.String" DbType="NVarChar(201)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Association Name="User_UserCompany" Member="UserCompanies" ThisKey="Id" OtherKey="UsersVerifyingTimeSheets_Id" Type="UserCompany" />
       <Association Name="User_TimeSheetEntry" Member="TimeSheetEntries" ThisKey="Id" OtherKey="VerifiedBy_Id" Type="TimeSheetEntry" />
@@ -189,7 +189,7 @@
       <Column Name="Code" Type="System.String" DbType="NVarChar(10)" CanBeNull="true" />
       <Column Name="UserName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
       <Column Name="FirstName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
-      <Column Name="Surname" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
       <Column Name="FullName" Type="System.String" DbType="NVarChar(201)" CanBeNull="true" />
       <Column Name="Email" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
       <Column Name="CompanyCode" Type="System.String" DbType="VarChar(10)" CanBeNull="true" />
