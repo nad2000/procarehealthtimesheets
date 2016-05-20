@@ -96,7 +96,7 @@ namespace SoftwareAssociates.ProCareHealth.Admin
                     this.UserNameTextBox.Text = user.UserName;
                     this.EmailTextBox.Text = user.Email;
                     this.FirstNameTextBox.Text = user.FirstName;
-                    this.SurnameTextBox.Text = user.Surname;
+                    this.LastNameTextBox.Text = user.LastName;
                     this.EmpNoTextBox.Text = user.Code;
                     if (this.CompanyDropDownList.Items.Count < 2) this.CompanyDropDownList.DataBind();
                     this.CompanyDropDownList.SelectedValue = user.CompanyWorkingFor_Id.ToString();
@@ -115,7 +115,7 @@ namespace SoftwareAssociates.ProCareHealth.Admin
                     this.UserNameTextBox.Text
                         = this.EmailTextBox.Text
                         = this.FirstNameTextBox.Text
-                        = this.SurnameTextBox.Text
+                        = this.LastNameTextBox.Text
                         = this.PasswordTextBox.Text
                         = this.Password2TextBox.Text;
                     this.CompanyDropDownList.SelectedValue = "";
@@ -153,7 +153,7 @@ namespace SoftwareAssociates.ProCareHealth.Admin
 
             user.Email = this.EmailTextBox.Text;
             user.FirstName = this.FirstNameTextBox.Text;
-            user.Surname = this.SurnameTextBox.Text;
+            user.LastName = this.LastNameTextBox.Text;
             if ( !String.IsNullOrEmpty(this.CompanyDropDownList.SelectedValue) )
                 user.CompanyWorkingFor_Id = Int32.Parse( this.CompanyDropDownList.SelectedValue );
             if (!String.IsNullOrEmpty(this.EmpNoTextBox.Text ))
