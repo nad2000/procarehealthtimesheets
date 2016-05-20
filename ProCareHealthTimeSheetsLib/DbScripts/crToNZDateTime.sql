@@ -1,9 +1,9 @@
 CREATE FUNCTION dbo.to_nz_datetime( @LocalDateTime DATETIME )
 RETURNS DATETIME
 AS
-BEGIN 
+BEGIN
   RETURN DATEADD( HOUR, DATEDIFF( HOUR, GETDATE(), GETUTCDATE() )+12, @LocalDateTime )
-END 
+END
 GO
 
 -- CREATE FUNCTION to_nz_date( @LocalDate DATE ) RETURNS DATE AS BEGIN RETURN NULL END
@@ -12,7 +12,7 @@ RETURNS DATE
 AS
 BEGIN
   RETURN CAST( dbo.to_nz_datetime( @LocalDate) AS DATE)
-END 
+END
 
 GO
 -- TEST: SELECT dbo.to_nz_date('11/1/2010')

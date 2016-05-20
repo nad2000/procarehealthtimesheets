@@ -1,4 +1,4 @@
-DROP TABLE dbo.WeekDays 
+DROP TABLE dbo.WeekDays
 GO
 CREATE TABLE dbo.WeekDays (
   [WeekDay] TINYINT NOT NULL PRIMARY KEY,

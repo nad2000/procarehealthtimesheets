@@ -1,7 +1,6 @@
 USE [TimeSheetDB]
 GO
 
-/****** Object:  Table [dbo].[TimeSheetEntries]    Script Date: 09/05/2010 12:52:17 ******/
 SET ANSI_NULLS ON
 GO
 
@@ -20,7 +19,7 @@ CREATE TABLE [dbo].[TimeSheetEntries](
 	[VerifiedBy_Id] [int] NULL,
 	[BreakLength] [smallint] NULL,
 	[TotalTime]  AS (CONVERT([int],datediff(minute,[StartedAt],[EndedAt])-coalesce([BreakLength],(0)),(0))),
- CONSTRAINT [PK_TimeSheetEntries] PRIMARY KEY CLUSTERED 
+ CONSTRAINT [PK_TimeSheetEntries] PRIMARY KEY CLUSTERED
 (
 	[Id] ASC
 )WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
@@ -28,15 +27,15 @@ CREATE TABLE [dbo].[TimeSheetEntries](
 
 GO
 
-ALTER TABLE [dbo].[TimeSheetEntries] 
-WITH CHECK ADD  CONSTRAINT [FK_TimeSheetEntries_BreakTypes] 
+ALTER TABLE [dbo].[TimeSheetEntries]
+WITH CHECK ADD  CONSTRAINT [FK_TimeSheetEntries_BreakTypes]
 FOREIGN KEY([Break_Id])
 REFERENCES [dbo].[BreakTypes] ([Id])
 ON UPDATE SET NULL
 ON DELETE SET NULL
 GO
 
-ALTER TABLE [dbo].[TimeSheetEntries] 
+ALTER TABLE [dbo].[TimeSheetEntries]
 CHECK CONSTRAINT [FK_TimeSheetEntries_BreakTypes]
 GO
 
@@ -52,12 +51,12 @@ ALTER TABLE [dbo].[TimeSheetEntries]
 CHECK CONSTRAINT [FK_TimeSheetEntries_Users]
 GO
 
-ALTER TABLE [dbo].[TimeSheetEntries]  
-WITH CHECK ADD  CONSTRAINT [FK_UserTimeSheetEntry] 
+ALTER TABLE [dbo].[TimeSheetEntries]
+WITH CHECK ADD  CONSTRAINT [FK_UserTimeSheetEntry]
 FOREIGN KEY([ReportedBy_Id])
 REFERENCES [dbo].[Users] ([Id])
 GO
 
-ALTER TABLE [dbo].[TimeSheetEntries] 
+ALTER TABLE [dbo].[TimeSheetEntries]
 CHECK CONSTRAINT [FK_UserTimeSheetEntry]
 GO

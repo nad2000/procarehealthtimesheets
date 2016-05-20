@@ -1,6 +1,6 @@
 USE TimeSheetDB
 GO
--- CREATE PROC dbo.GetApprovableUsers AS 
+-- CREATE PROC dbo.GetApprovableUsers AS
 /*
   Gets users whose timesheets the user (@UserName) has rights to approve.
 */
@@ -16,5 +16,5 @@ FROM dbo.Users AS u
 	JOIN dbo.Companies AS c ON c.Id = u.CompanyWorkingFor_Id
 	JOIN dbo.UserCompany AS uc ON uc.Companies_Id = c.Id
 WHERE uc.UsersVerifyingTimeSheets_Id = dbo.UserIdByName( @UserName )
-ORDER BY u.FirstName, u.Surname
+ORDER BY u.FirstName, u.LastName
 GO

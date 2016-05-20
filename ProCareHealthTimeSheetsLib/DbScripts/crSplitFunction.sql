@@ -1,8 +1,8 @@
 USE TimeSheetDB
-GO 
+GO
 
 /*
-SELECT * 
+SELECT *
 FROM dbo.split(N',,45 , 1, 56, 346 456,8,5, ,d,1,4, 5 9 ,t,,4,5 ,,, w, 3,,',1,0)
 */
 
@@ -20,20 +20,20 @@ declare @i int, @j int
 
 select @i = 0, @j = (len(@s) - len(replace(@s,',','')))
 
-;with cte 
+;with cte
 as
 (
   select
     i = @i + 1,
-    s = @s, 
+    s = @s,
     n = substring(@s, 0, charindex(',', @s)),
     m = substring(@s, charindex(',', @s)+1, len(@s) - charindex(',', @s))
 
   union all
 
-  select 
+  select
     i = cte.i + 1,
-    s = cte.m, 
+    s = cte.m,
     n = substring(cte.m, 0, charindex(',', cte.m)),
     m = substring(
       cte.m,
@@ -45,10 +45,10 @@ as
 )
 insert into @t (val)
 select pieces
-from 
+from
 (
-  select 
-  case 
+  select
+  case
     when @trimPieces = 1
     then ltrim(rtrim(case when i <= @j then n else m end))
     else case when i <= @j then n else m end

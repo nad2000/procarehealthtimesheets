@@ -18,7 +18,7 @@ BEGIN
 	VALUES ( DATEADD( WEEK, -@WeekNum, @CurrentWeekEndingDate ))
 	SET @WeekNum = @WeekNum + 1
   END
-	RETURN 
+	RETURN
 END
 GO
 
@@ -33,9 +33,9 @@ GO
 /*
 CREATE FUNCTION dbo.ThisWeekEndingDate()
 RETURNS DATE
-AS BEGIN RETURN NULL END 
+AS BEGIN RETURN NULL END
 */
-GO 
+GO
 
 -- Test: SELECT dbo.ThisWeekEndingDate()
 -- Actually - the last week ending date :)
@@ -46,7 +46,7 @@ BEGIN
 -- RETURN ( dbo.to_nz_date(
 --   DATEADD(DAY, -DATEPART( WEEKDAY, dbo.to_nz_datetime(GETDATE())), dbo.to_nz_datetime(GETDATE()) )) )
   RETURN ( DATEADD(DAY, -DATEPART( WEEKDAY, GETDATE()), GETDATE() ))
-END 
+END
 
 /*
 
@@ -56,9 +56,9 @@ SELECT DATEPART( WEEKDAY, GETDATE()), GETDATE(), cast(  dbo.to_nz_datetime(GETDA
 
 CREATE FUNCTION dbo.LastWeekEndingDate()
 RETURNS DATE
-AS BEGIN RETURN NULL END 
+AS BEGIN RETURN NULL END
 */
-GO 
+GO
 
 -- Test: SELECT dbo.LastWeekEndingDate()
 -- Actually - the last week before the last ending date :)
@@ -68,4 +68,4 @@ AS
 BEGIN
   RETURN ( DATEADD(DAY, -7, dbo.ThisWeekEndingDate() ) )
    -- RETURN ( dbo.to_nz_date( DATEADD(DAY, -DATEPART( WEEKDAY, GETDATE())-7 , GETDATE() )) )
-END 
+END

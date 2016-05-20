@@ -3,7 +3,7 @@ GO
 USE [TimeSheetDB];
 GO
 
-INSERT INTO Companies (Code,Name) VALUES 
+INSERT INTO Companies (Code,Name) VALUES
 ('Z4M4Q0','Nulla aliquet. Proin velit.'),
 ('B4J4L6','sem. Pellentesque'),
 ('Y9P9S3','dui augue'),

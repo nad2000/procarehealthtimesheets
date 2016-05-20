@@ -6,7 +6,7 @@ SET ANSI_NULLS OFF
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- CREATE PROC dbo.UserTimeSheetEntry_Update AS 
+-- CREATE PROC dbo.UserTimeSheetEntry_Update AS
 ALTER PROC [dbo].[UserTimeSheetEntry_Update]
   @Id INT,
   @Date DATE,
@@ -34,10 +34,10 @@ BEGIN
   SELECT
     @Date, @StartedAt, @EndedAt, @Break_Id, @ReportedBy_Id
   WHERE
-	@Date IS NOT NULL 
+	@Date IS NOT NULL
 	OR @StartedAt IS NOT NULL
 	OR @EndedAt IS NOT NULL
-	OR @Break_Id IS NOT NULL 
+	OR @Break_Id IS NOT NULL
 	OR @ReportedBy_Id IS NOT NULL
   IF @@ROWCOUNT > 0
     SET @Id = SCOPE_IDENTITY()
@@ -54,7 +54,7 @@ BEGIN
 		AND NOT ([StartedAt] = @StartedAt AND [EndedAt] = @EndedAt AND [Break_Id] = @Break_Id)
 END
 
-/*SELECT 
+/*SELECT
 	Id,
 	[Date],
 	StartedAt,

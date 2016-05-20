@@ -16,7 +16,7 @@ RETURN (
 )
 END
 GO
- 
+
 
 /*
 SQL Server 2005 does not provide specific functions for Base64 encoding / decoding,

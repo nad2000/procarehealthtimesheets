@@ -1,6 +1,6 @@
 USE TimeSheetDB
 
--- CREATE PROC dbo.ApproverTimeSheetEntry_Update AS 
+-- CREATE PROC dbo.ApproverTimeSheetEntry_Update AS
 GO
 
 -- NB!!!
@@ -35,7 +35,7 @@ BEGIN
   SELECT
     @Date, @StartedAt, @EndedAt, @Break_Id, @ReportedBy_Id
   WHERE
-	@Date IS NOT NULL 
+	@Date IS NOT NULL
   IF @@ROWCOUNT > 0
     SET @Id = SCOPE_IDENTITY()
 END
@@ -43,7 +43,7 @@ IF @Id IS NULL RETURN
 
 
 UPDATE dbo.[TimeSheetEntries]
-SET 
+SET
   IsApproved = @IsApproved,
   Comment = @Comment,
   VerifiedBy_Id = @VerifiedBy_Id,
@@ -52,11 +52,11 @@ SET
   Break_Id  = @Break_Id
 WHERE [Id] = @Id AND NOT (
 	-- NB!!! Don't forget SET ANSI_NULLS OFF
-  ( IsApproved = @IsApproved ) 
-  AND ( Comment = @Comment ) 
-  AND ( VerifiedBy_Id = @VerifiedBy_Id ) 
-  AND ( StartedAt = @StartedAt ) 
-  AND ( EndedAt = @EndedAt ) 
+  ( IsApproved = @IsApproved )
+  AND ( Comment = @Comment )
+  AND ( VerifiedBy_Id = @VerifiedBy_Id )
+  AND ( StartedAt = @StartedAt )
+  AND ( EndedAt = @EndedAt )
   AND ( Break_Id  = @Break_Id ) )
 
 GO

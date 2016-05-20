@@ -8,7 +8,7 @@ SELECT
   u.Code,
   u.UserName,
   u.FirstName,
-  u.Surname,
+  u.LastName,
   u.FullName,
   u.Email,
   c.Code AS CompanyCode,
@@ -19,9 +19,9 @@ WHERE u.UserName = @UserName
 GO
 /*
 -- Update records:
-INSERT INTO dbo.Users 
- ( UserName, Name, Email) 
-SELECT 
+INSERT INTO dbo.Users
+ ( UserName, Name, Email)
+SELECT
 	-- u.UserId,
 	u.UserName,
 	m.Email,

@@ -1,0 +1,18 @@
+USE [TimeSheetDB]
+GO
+
+SET ANSI_NULLS ON
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+
+DROP TABLE [dbo].[TimeSheetEntries]
+GO
+DROP TABLE dbo.UserCompany
+GO
+DROP TABLE dbo.Users
+GO
+DROP TABLE dbo.Companies
+GO
+

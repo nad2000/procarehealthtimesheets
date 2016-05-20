@@ -1,5 +1,5 @@
 /*
-select 
+select
 'EXEC [dbo].[aspnet_Users_DeleteUser] ''/'', '''+ UserName + ''', 255, @n output'
 from dbo.aspnet_Users
 where UserName like '%@%'
@@ -1216,7 +1216,7 @@ from dbo.Users
 delete from dbo.Users where Id in (1842,
 1843,
 1844,
-1845) 
+1845)
 
 delete from dbo.TimeSheetEntries where VerifiedBy_Id in (1842,
 1843,
@@ -1224,7 +1224,7 @@ delete from dbo.TimeSheetEntries where VerifiedBy_Id in (1842,
 1845) OR ReportedBy_Id in (1842,
 1843,
 1844,
-1845) 
+1845)
 
 
 USE [TimeSheetDB]
@@ -1238,9 +1238,9 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER TABLE [dbo].[UserCompany]  DROP CONSTRAINT [FK_UserCompany_Company]
-GO 
+GO
 ALTER TABLE [dbo].[UserCompany]  WITH CHECK ADD  CONSTRAINT [FK_UserCompany_Company] FOREIGN KEY([Companies_Id])
-REFERENCES [dbo].[Companies] ([Id]) 
+REFERENCES [dbo].[Companies] ([Id])
 ON DELETE CASCADE
 GO
 

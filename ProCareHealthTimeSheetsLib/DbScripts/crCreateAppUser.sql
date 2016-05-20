@@ -33,7 +33,7 @@ DECLARE
 
 SET @encoded_salt = dbo.base64_encode(@salt)
 SET @encoded_hashed_password = dbo.base64_encode(HASHBYTES('SHA1', Cast(@salt as varbinary(MAX)) + CAST(@ClearTextPassword AS varbinary(MAX)) ))
- 
+
 EXECUTE @RC = aspnet_Membership_CreateUser
 		@ApplicationName=@ApplicationName,
 		@UserName=@UserName,

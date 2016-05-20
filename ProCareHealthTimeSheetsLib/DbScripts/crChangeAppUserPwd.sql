@@ -1,7 +1,7 @@
 USE TimeSheetDB
 GO
 -- EXEC dbo.changeAppUserPwd 'GrahamF'
--- CREATE PROC dbo.changeAppUserPwd AS 
+-- CREATE PROC dbo.changeAppUserPwd AS
 ALTER PROCEDURE dbo.changeAppUserPwd
   @UserName nvarchar(256),
   @ClearTextPassword nvarchar(128) = '1234567',
@@ -21,7 +21,7 @@ DECLARE
 
 SET @encoded_salt = dbo.base64_encode(@salt)
 SET @encoded_hashed_password = dbo.base64_encode(HASHBYTES('SHA1', Cast(@salt as varbinary(MAX)) + CAST(@ClearTextPassword AS varbinary(MAX)) ))
- 
+
 EXECUTE @RC = dbo.aspnet_Membership_SetPassword
 		@ApplicationName=@ApplicationName,
 		@UserName=@UserName,

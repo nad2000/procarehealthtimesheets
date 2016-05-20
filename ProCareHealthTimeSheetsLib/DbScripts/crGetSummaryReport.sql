@@ -1,40 +1,12 @@
 USE [TimeSheetDB]
 GO
-/*
-CREATE TABLE dbo.SPLog (
-	LogTimeStamp DATETIME DEFAULT GETDATE(),
-	LogRec NVARCHAR(max) )
-
-CREATE FUNCTION dbo.DumpParam( @Param sql_variant )
-RETURNS NVARCHAR(max)
-AS
-BEGIN
-	RETURN COALESCE( CAST( @Param AS NVARCHAR(max)), '=NULL=')
-END
-
-*/
-/****** Object:  StoredProcedure [dbo].[GetTimeSheetSummary]    Script Date: 08/22/2010 05:55:46 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
 -- CREATE PROC dbo.GetTimeSheetSummary AS
-ALTER PROCEDURE [dbo].[GetTimeSheetSummary] (
+ALTER PROCEDURE dbo.GetTimeSheetSummary (
 	@ReportRequestedBy_Id INT = NULL, -- User requesting report
 	@DateFrom DATE = NULL,
 	@DateTo DATE = NULL,
-	@UserName NVARCHAR(256) = NULL)
+	@UserName NVARCHAR(256) = NULL )
 AS
-INSERT INTO dbo.SPLog (LogRec) VALUES (
-dbo.DumpParam(@ReportRequestedBy_Id)+', '+
-dbo.DumpParam(@DateFrom)+', '+
-dbo.DumpParam(@DateTo)+', '+
-dbo.DumpParam(@UserName))
--- SELECT * FROM dbo.SPLog ORDER BY LogTimeStamp DESC
-
-IF @UserName='ALL' SET @UserName = NULL
-
 DECLARE @UserId INT = (SELECT TOP 1 Id FROM Users WHERE UserName=@UserName)
 -- Monday of the current week
 IF @DateFrom IS NULL
@@ -44,20 +16,20 @@ IF @DateTo IS NULL
 
 SELECT
 	u.Id,
-	u.FullName,
+	u.Name,
     @DateFrom AS StartDate,
     @DateTo AS EndDate,    
-	NULLIF( s.ApprovedTotalTime, 0) AS ApprovedTotalTime,
-	NULLIF( s.NotApprovedTotalTime, 0) AS NotApprovedTotalTime,
-	NULLIF( s.ApprovedTotalBreakTime, 0) AS ApprovedTotalBreakTime,
-	NULLIF( s.NotApprovedTotalBreakTime, 0) AS NotApprovedTotalBreakTime,
+	s.ApprovedTotalTime,
+	s.NotApprovedTotalTime,
+	s.ApprovedTotalBreakTime,
+	s.NotApprovedTotalBreakTime,
     (
         SELECT  tse.Comment + '
 '
         FROM    TimeSheetEntries tse
         WHERE   tse.Comment IS NOT NULL AND tse.ReportedBy_Id = u.Id
           AND ( @DateTo IS NULL OR tse.[Date] < DATEADD( day, 1, @DateTo ) )
-	      AND ( @DateFrom IS NULL OR @DateFrom <= tse.[Date])
+	      AND ( @DateFrom IS NULL OR @DateFrom >= tse.[Date])
         FOR XML PATH('')
     ) AS Comments
 FROM (
@@ -69,9 +41,7 @@ FROM (
 	FROM dbo.TimeSheetEntries AS tse
 	WHERE
 	  ( @DateTo IS NULL OR tse.[Date] < DATEADD( day, 1, @DateTo ) )
-	  AND ( @DateFrom IS NULL OR @DateFrom <= tse.[Date])
+	  AND ( @DateFrom IS NULL OR @DateFrom >= tse.[Date])
 	  AND ( @UserName IS NULL OR tse.ReportedBy_Id = @UserId)
 	GROUP BY tse.ReportedBy_Id ) AS s -- Summary
 	JOIN Users AS u ON u.Id = s.ReportedBy_Id
-
-GO

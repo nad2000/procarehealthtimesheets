@@ -5,7 +5,7 @@ SET ANSI_NULLS ON
 SET QUOTED_IDENTIFIER ON
 GO
 
--- CREATE PROCEDURE [dbo].[GetFullTimeSheetRecords] AS 
+-- CREATE PROCEDURE [dbo].[GetFullTimeSheetRecords] AS
 /*
 DECLARE @DateFrom DATE = GETDATE()-30
 DECLARE @DateTo DATE = GETDATE()
@@ -23,9 +23,9 @@ ALTER PROCEDURE [dbo].[GetFullTimeSheetRecords] (
 	@CompanyId INT = NULL,
 	@UserName NVARCHAR(256) = 'ALL')
 AS
-/*INSERT INTO dbo.SPLog (LogRec) VALUES ( 
+/*INSERT INTO dbo.SPLog (LogRec) VALUES (
 dbo.DumpParam(@ReportRequestedBy_Id)+', '+
-dbo.DumpParam(@DateFrom)+', '+ 
+dbo.DumpParam(@DateFrom)+', '+
 dbo.DumpParam(@DateTo)+', '+
 dbo.DumpParam(@CompanyId)+', '+
 dbo.DumpParam(@UserName)) */
@@ -41,7 +41,7 @@ IF @DateFrom IS NULL
 	SET @DateFrom = DATEADD( day, 1-DATEPART( weekday, GETDATE())-7, GETDATE())
 IF @DateTo IS NULL
 	SET @DateTo = DATEADD( day, 13, @DateFrom)
-SELECT 
+SELECT
 	tse.Id,
 	c.Code AS CompanyCode,
 	u.Id AS UserId,
@@ -55,11 +55,11 @@ SELECT
 	tse.TotalTime,
 	tse.IsApproved,
 	tse.Comment
-FROM dbo.TimeSheetEntries AS tse 
+FROM dbo.TimeSheetEntries AS tse
 	JOIN dbo.Users AS u ON u.Id = tse.ReportedBy_Id
 	LEFT JOIN dbo.BreakTypes AS bt ON tse.Break_Id = bt.Id
 	LEFT JOIN dbo.Companies AS c ON c.Id = u.CompanyWorkingFor_Id
-WHERE 
+WHERE
 	( @UserId IS NULL OR u.Id = @UserId )
 	AND ( @DateFrom IS NULL OR @DateFrom <= tse.[Date] )
 	AND ( @DateTo IS NULL OR @DateTo >= tse.[Date] )

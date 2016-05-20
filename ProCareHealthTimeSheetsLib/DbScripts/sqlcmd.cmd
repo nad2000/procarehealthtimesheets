@@ -1,0 +1,1 @@
+"C:\Program Files\Microsoft SQL Server\110\Tools\Binn\SQLCMD.EXE" %*

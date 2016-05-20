@@ -28,11 +28,11 @@ CREATE UNIQUE NONCLUSTERED INDEX [IX_BreakTypesTimeSheetEntry_Date]
 ON [dbo].[TimeSheetEntries] (  ReportedBy_Id, [Date] ASC )
 GO
 
--- CREATE PROCEDURE dbo.GetUserTimeSheetEntries AS 
+-- CREATE PROCEDURE dbo.GetUserTimeSheetEntries AS
 ALTER PROCEDURE dbo.GetUserTimeSheetEntries (
 	@UserName NVARCHAR(256), --  @UserId SQL_VARIANT, -- INT (Id) or VARCHAR (UserName)
 	@WeekEndingDate DATE = NULL )
-AS 
+AS
 DECLARE @FirstDayOfTheWeek DATE
 
 IF @WeekEndingDate IS NULL
@@ -42,7 +42,7 @@ SET @WeekEndingDate
   = DATEADD( DAY, 7-DATEPART( WEEKDAY, @WeekEndingDate), @WeekEndingDate )
 
 -- Day of the year: (@WeekNumber-1)*7+1
-SELECT 
+SELECT
   tse.Id,
   CAST ( COALESCE( [Date], WeekDayDate) AS DATE) AS [Date],
   StartedAt,
@@ -54,7 +54,7 @@ SELECT
   bt.Name AS BreakName,
   COALESCE( ReportedBy_Id, u.Id) AS ReportedBy_Id,
   VerifiedBy_Id
-FROM 
+FROM
 ( SELECT
 	[WeekDay],
 	CAST ( DATEADD( DAY, [WeekDay]-7 ,@WeekEndingDate ) AS DATE) AS WeekDayDate
