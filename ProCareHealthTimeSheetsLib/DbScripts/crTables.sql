@@ -34,6 +34,7 @@ CREATE TABLE [dbo].[Users]
     [LastName] NVARCHAR(100) NOT NULL,
     [FullName] AS [FirstName] + ' ' + [LastName],
     [UserName] NVARCHAR(256) NOT NULL,
+	[Code] VARCHAR(10) NULL,
 	[LoweredUserName] AS LOWER(UserName),
     [CompanyWorkingFor_Id] INT NULL,
 	FOREIGN KEY (CompanyWorkingFor_Id) REFERENCES dbo.Companies ([Id]) ON DELETE CASCADE ON UPDATE CASCADE
@@ -46,9 +47,9 @@ GO
 
 CREATE TABLE dbo.UserCompany
 (
-	[UserId] INT NOT NULL ,
+	[UsersVerifyingTimeSheets_Id] INT NOT NULL ,
 	[CompanyId] INT NOT NULL,
-	UNIQUE (UserId, CompanyId),
-	FOREIGN KEY (UserId) REFERENCES dbo.Users ([Id]) ON DELETE CASCADE,
+	UNIQUE (UsersVerifyingTimeSheets_Id, CompanyId),
+	FOREIGN KEY (UsersVerifyingTimeSheets_Id) REFERENCES dbo.Users ([Id]) ON DELETE CASCADE,
 	FOREIGN KEY (CompanyId) REFERENCES dbo.Companies ([Id]))
 GO

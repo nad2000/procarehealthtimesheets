@@ -92,10 +92,10 @@
     <asp:TextBox ID="FirstNameTextBox" runat="server" Width="75%" />
     </td></tr>
     <tr><td>
-    <asp:Label ID="SurnameLabel" runat="server" Text="Surname: " 
-            AssociatedControlID="SurnameTextBox" style="font-weight: 700" />
+    <asp:Label ID="LastNameLabel" runat="server" Text="LastName: " 
+            AssociatedControlID="LastNameTextBox" style="font-weight: 700" />
     </td><td>
-    <asp:TextBox ID="SurnameTextBox" runat="server" Width="75%" />
+    <asp:TextBox ID="LastNameTextBox" runat="server" Width="75%" />
     </td></tr>
     <tr><td>
     <asp:Label ID="CompanyLabel" runat="server" Text="Company: " 

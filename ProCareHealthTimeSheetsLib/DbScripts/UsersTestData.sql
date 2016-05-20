@@ -133,8 +133,8 @@ FROM (VALUES
 AS TestData (UserName, Email, FirstName, LastName)
 GO
 
-INSERT INTO Users (UserName, Email, FirstName, LastName)
-SELECT STR([Num])+UserName, Email, FirstName, LastName
+INSERT INTO Users (UserName, Email, FirstName, LastName, Code)
+SELECT CAST([Num] AS VARCHAR)+UserName, Email, FirstName, LastName, 'U00'+CAST([Num] AS VARCHAR)
 FROM #Users
 GO
 

@@ -193,16 +193,16 @@ namespace SoftwareAssociates.ProCareHealth.Admin {
         protected global::System.Web.UI.WebControls.TextBox FirstNameTextBox;
         
         /// <summary>
-        /// SurnameLabel control.
+        /// LastNameLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SurnameLabel;
+        protected global::System.Web.UI.WebControls.Label LastNameLabel;
         
         /// <summary>
-        /// SurnameTextBox control.
+        /// LastNameTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
