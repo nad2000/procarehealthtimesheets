@@ -9,10 +9,19 @@ GO
 
 -- DROP TABLE #Users
 -- GO
+EXECUTE dbo.createAppUser 'user0', '12345'
+GO
+EXECUTE dbo.createAppUser 'user1', '12345'
+GO
+EXECUTE dbo.createAppUser 'user2', '12345'
+GO
 
 SELECT IDENTITY(INT) AS [Num], UserName, Email, FirstName, LastName 
 INTO #Users
 FROM (VALUES
+('user0', 'user0@nowhere.com','Test', 'User0'),
+('user1', 'user1@nowhere.com','Test', 'User1'),
+('user2', 'user2@nowhere.com','Test', 'User2'),
 ('tristique', 'tristique@luctusutpellentesque.com','Hilda', 'Herman'),
 ('augue.malesuada.malesuada', 'augue.malesuada.malesuada@vehicula.org','Cairo', 'Hardy'),
 ('Duis.sit', 'Duis.sit@nec.edu','Martha', 'Hewitt'),
@@ -135,7 +144,15 @@ GO
 
 INSERT INTO Users (UserName, Email, FirstName, LastName, Code)
 SELECT CAST([Num] AS VARCHAR)+UserName, Email, FirstName, LastName, 'U00'+CAST([Num] AS VARCHAR)
-FROM #Users
+FROM #Users u LEFT JOIN Users AS eu ON eu.UserName = u.UserName
+GO
+
+DELETE FROM Users WHERE Email = 'nad2000@gmail.com'
+GO
+INSERT INTO Users ([Email] ,[FirstName],[LastName],[UserName],[Code],[CompanyWorkingFor_Id])
+VALUES ('nad2000@gmail.com','Radomirs','Cirskis','nad2000','NAD2K',(SELECT MIN(Id) FROM Companies))
+GO
+EXECUTE dbo.createAppUser 'nad2000', '12345'
 GO
 
 -- Assign to the companies:

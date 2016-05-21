@@ -1,15 +1,15 @@
 USE [TimeSheetDB]
 GO
-
-/****** Object:  Table [dbo].[BreakTypes]    Script Date: 08/15/2010 21:12:47 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-
 ALTER TABLE [dbo].[TimeSheetEntries]
 DROP CONSTRAINT [FK_BreakTypesTimeSheetEntry]
+GO
+ALTER TABLE [dbo].[TimeSheetEntries]
+DROP CONSTRAINT [FK_TimeSheetEntries_BreakTypes]
 GO
 
 DROP TABLE [dbo].[BreakTypes]
@@ -18,7 +18,7 @@ GO
 CREATE TABLE [dbo].[BreakTypes](
 	[Id] [smallint] IDENTITY(1,1) NOT NULL,
 	[Code] [varchar](10) UNIQUE  NOT NULL,
-	[AlternateCode] [varchar](10) NULL,
+	[AlternativeCode] [varchar](10) NULL,
 	[Name] [nvarchar](100) UNIQUE NOT NULL,
 	[TimeValue] [int] UNIQUE NOT NULL,
  CONSTRAINT [PK_BreakTypes] PRIMARY KEY CLUSTERED
@@ -69,3 +69,4 @@ FROM ( VALUES (0),(15),(30),(45) ) AS MinVals(m),
 LEFT JOIN dbo.BreakTypes AS bt ON bt.TimeValue = breaks.interval
 WHERE bt.Id IS NULL AND m+h <> 0
 ORDER BY 2
+GO

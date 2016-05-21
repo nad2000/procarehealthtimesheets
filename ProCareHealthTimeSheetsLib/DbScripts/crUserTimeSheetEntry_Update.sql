@@ -6,8 +6,10 @@ SET ANSI_NULLS OFF
 GO
 SET QUOTED_IDENTIFIER ON
 GO
--- CREATE PROC dbo.UserTimeSheetEntry_Update AS
-ALTER PROC [dbo].[UserTimeSheetEntry_Update]
+
+CREATE PROC dbo.UserTimeSheetEntry_Update
+GO
+CREATE PROC [dbo].[UserTimeSheetEntry_Update]
   @Id INT,
   @Date DATE,
   @StartedAt TIME,

@@ -49,3 +49,23 @@ EXECUTE @RC = aspnet_Membership_CreateUser
 		@UniqueEmail=1,
 		@UserId=@UserId OUTPUT
 END
+GO
+
+-- Add Roles: Employees,Administrators,Approvers
+EXEC aspnet_Roles_CreateRole '/', 'Users'
+GO
+EXEC aspnet_Roles_CreateRole '/', 'Employees'
+GO
+EXEC aspnet_Roles_CreateRole '/', 'Administrators'
+GO
+EXEC aspnet_Roles_CreateRole '/', 'Approvers'
+GO
+
+-- Add a test user 'user0' to all roles:
+EXEC aspnet_UsersInRoles_AddUsersToRoles '/', 'user0', 'Employees', NULL
+GO
+EXEC aspnet_UsersInRoles_AddUsersToRoles '/', 'user0', 'Administrators', NULL
+GO
+EXEC aspnet_UsersInRoles_AddUsersToRoles '/', 'user0', 'Approvers', NULL
+GO
+

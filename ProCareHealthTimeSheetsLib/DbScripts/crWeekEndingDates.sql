@@ -2,9 +2,10 @@
 USE TimeSheetDB
 GO
 
+DROP FUNCTION dbo.WeekEndingDates
+GO
 -- SELECT * FROM dbo.WeekEndingDates(DEFAULT)
-ALTER FUNCTION dbo.WeekEndingDates
-( @Count TINYINT = 10 )
+CREATE FUNCTION dbo.WeekEndingDates( @Count TINYINT = 10 )
 RETURNS @WeekEndings TABLE (WeekEndingDate DATE)
 AS
 BEGIN
@@ -22,24 +23,21 @@ BEGIN
 END
 GO
 
+DROP PROC dbo.GetWeekEndingDates
+GO
 -- CREATE PROC dbo.GetWeekEndingDates
-ALTER PROC dbo.GetWeekEndingDates
-( @Count TINYINT = 10 )
+CREATE PROC dbo.GetWeekEndingDates( @Count TINYINT = 10 )
 AS
 SELECT WeekEndingDate FROM dbo.WeekEndingDates(@Count)
 GO
 
-
-/*
-CREATE FUNCTION dbo.ThisWeekEndingDate()
-RETURNS DATE
-AS BEGIN RETURN NULL END
-*/
+DROP FUNCTION dbo.ThisWeekEndingDate
 GO
-
+CREATE FUNCTION dbo.ThisWeekEndingDate()
+GO
 -- Test: SELECT dbo.ThisWeekEndingDate()
 -- Actually - the last week ending date :)
-ALTER FUNCTION dbo.ThisWeekEndingDate()
+CREATE FUNCTION dbo.ThisWeekEndingDate()
 RETURNS DATE
 AS
 BEGIN
@@ -47,25 +45,23 @@ BEGIN
 --   DATEADD(DAY, -DATEPART( WEEKDAY, dbo.to_nz_datetime(GETDATE())), dbo.to_nz_datetime(GETDATE()) )) )
   RETURN ( DATEADD(DAY, -DATEPART( WEEKDAY, GETDATE()), GETDATE() ))
 END
+GO
 
 /*
-
 SELECT DATEPART( WEEKDAY, dbo.to_nz_date(GETDATE()))
 SELECT DATEPART( WEEKDAY, GETDATE()), GETDATE(), cast(  dbo.to_nz_datetime(GETDATE()) as date)
-
-
-CREATE FUNCTION dbo.LastWeekEndingDate()
-RETURNS DATE
-AS BEGIN RETURN NULL END
 */
 GO
 
+DROP FUNCTION dbo.LastWeekEndingDate
+GO
 -- Test: SELECT dbo.LastWeekEndingDate()
 -- Actually - the last week before the last ending date :)
-ALTER FUNCTION dbo.LastWeekEndingDate()
+CREATE FUNCTION dbo.LastWeekEndingDate()
 RETURNS DATE
 AS
 BEGIN
   RETURN ( DATEADD(DAY, -7, dbo.ThisWeekEndingDate() ) )
    -- RETURN ( dbo.to_nz_date( DATEADD(DAY, -DATEPART( WEEKDAY, GETDATE())-7 , GETDATE() )) )
 END
+GO
