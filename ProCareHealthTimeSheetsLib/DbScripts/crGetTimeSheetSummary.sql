@@ -1,5 +1,9 @@
 USE [TimeSheetDB]
 GO
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 /*
 CREATE TABLE dbo.SPLog (
 	LogTimeStamp DATETIME DEFAULT GETDATE(),
@@ -13,14 +17,9 @@ BEGIN
 END
 
 */
-/****** Object:  StoredProcedure [dbo].[GetTimeSheetSummary]    Script Date: 08/22/2010 05:55:46 ******/
-SET ANSI_NULLS ON
+DROP PROCEDURE dbo.GetTimeSheetSummary
 GO
-
-SET QUOTED_IDENTIFIER ON
-GO
--- CREATE PROC dbo.GetTimeSheetSummary AS
-ALTER PROCEDURE [dbo].[GetTimeSheetSummary] (
+CREATE PROCEDURE [dbo].[GetTimeSheetSummary] (
 	@ReportRequestedBy_Id INT = NULL, -- User requesting report
 	@DateFrom DATE = NULL,
 	@DateTo DATE = NULL,

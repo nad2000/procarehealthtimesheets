@@ -1,3 +1,5 @@
+DROP FUNCTION dbo.to_nz_datetime
+GO
 CREATE FUNCTION dbo.to_nz_datetime( @LocalDateTime DATETIME )
 RETURNS DATETIME
 AS
@@ -6,8 +8,9 @@ BEGIN
 END
 GO
 
--- CREATE FUNCTION to_nz_date( @LocalDate DATE ) RETURNS DATE AS BEGIN RETURN NULL END
-ALTER FUNCTION dbo.to_nz_date( @LocalDate DATE )
+DROP FUNCTION to_nz_date
+GO
+CREATE FUNCTION dbo.to_nz_date( @LocalDate DATE )
 RETURNS DATE
 AS
 BEGIN

@@ -185,12 +185,12 @@ namespace SoftwareAssociates.ProCareHealth.Admin
             {
                 CheckBoxWithValue checkBox = (CheckBoxWithValue)dli.FindControl("AssignedCompanyCheckBoxWithValue");
                 int companyId = Convert.ToInt32(checkBox.Value);
-                UserCompany uc = user.UserCompanies.SingleOrDefault(c => c.Companies_Id == companyId);
+                UserCompany uc = user.UserCompanies.SingleOrDefault(c => c.CompanyId == companyId);
                 if (uc == null && checkBox.Checked) // Add
                 {
                     uc = new UserCompany();
                     uc.User = user;
-                    uc.Companies_Id = companyId;
+                    uc.CompanyId = companyId;
                     user.UserCompanies.Add(uc);
                 }
                 else if (uc != null && !checkBox.Checked) // Remove
@@ -204,7 +204,6 @@ namespace SoftwareAssociates.ProCareHealth.Admin
             this.DataContext.SubmitChanges();
             this.AllUsersGridView.DataBind();
         }
-
 
         public void updateUserRole(string UserName, string RoleName, Boolean addToRole)
         {

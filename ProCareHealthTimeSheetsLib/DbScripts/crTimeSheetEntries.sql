@@ -6,11 +6,11 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [dbo].[TimeSheetEntries] (
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Id] [int] IDENTITY(1,1) NOT NULL PRIMARY KEY,
 	[Date] [date] NOT NULL,
 	[StartedAt] [time](7) NOT NULL,
 	[EndedAt] [time](7) NOT NULL,
-	[IsApproved] [bit] NULL,
+	ModifiedAt DATETIME NULL,
 	[Comment] [nvarchar](max) NULL,
 	[Break_Id] [smallint] NULL,
 	[ReportedBy_Id] [int] NOT NULL,
@@ -19,15 +19,9 @@ CREATE TABLE [dbo].[TimeSheetEntries] (
 	[TotalTime]  AS (
 		CONVERT([int],datediff(minute,[StartedAt],[EndedAt])-coalesce([BreakLength],(0)),(0))
 	),
-	CONSTRAINT [PK_TimeSheetEntries] PRIMARY KEY CLUSTERED ([Id] ASC)
-) WITH (
-	PAD_INDEX  = OFF, 
-	STATISTICS_NORECOMPUTE = OFF, 
-	IGNORE_DUP_KEY = OFF, 
-	ALLOW_ROW_LOCKS  = ON, 
-	ALLOW_PAGE_LOCKS  = ON)
-	ON [PRIMARY]
-) ON [PRIMARY]
+	[IsApproved] [bit] NULL
+)
+ON [PRIMARY]
 
 GO
 

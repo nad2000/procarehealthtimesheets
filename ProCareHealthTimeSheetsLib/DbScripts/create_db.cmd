@@ -1,9 +1,10 @@
 SET SQLCMD="C:\Program Files\Microsoft SQL Server\110\Tools\Binn\SQLCMD.EXE"
 SET SERVER=(localdb)\MSSQLLocalDB
+SET DB=TimeSheetDB
 
-%SQLCMD% -E -S %SERVER% -d TimeSheetDB -i dropAllTables.sql
-%SQLCMD% -E -S %SERVER% -d TimeSheetDB -i crTables.sql
-%SQLCMD% -E -S %SERVER% -d TimeSheetDB -i crTimeSheetEntries.sql
+%SQLCMD% -E -S %SERVER% -d %DB% -i dropAllTables.sql
+%SQLCMD% -E -S %SERVER% -d %DB%  -i crTables.sql
+%SQLCMD% -E -S %SERVER% -d %DB% -i crTimeSheetEntries.sql
 
 FOR %%F IN (
 	crBase64.sql
@@ -25,4 +26,4 @@ FOR %%F IN (
 	crUserTimeSheetEntry_Update.sql
 	crUser_Select.sql
 	crWeekDays.sql
-	crWeekEndingDates.sql ) DO %SQLCMD% -E -S %SERVER% -d TimeSheetDB -i %%F
+	crWeekEndingDates.sql ) DO %SQLCMD% -E -S %SERVER% -d %DB% -i %%F

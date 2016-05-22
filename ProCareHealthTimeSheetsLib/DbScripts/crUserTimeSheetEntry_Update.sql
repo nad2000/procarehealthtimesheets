@@ -1,15 +1,14 @@
 USE [TimeSheetDB]
 GO
-
 -- NB!!!
 SET ANSI_NULLS OFF
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROC dbo.UserTimeSheetEntry_Update
+DROP PROCEDURE dbo.UserTimeSheetEntry_Update
 GO
-CREATE PROC [dbo].[UserTimeSheetEntry_Update]
+CREATE PROCEDURE [dbo].[UserTimeSheetEntry_Update]
   @Id INT,
   @Date DATE,
   @StartedAt TIME,

@@ -6,6 +6,8 @@ SELECT *
 FROM dbo.split(N',,45 , 1, 56, 346 456,8,5, ,d,1,4, 5 9 ,t,,4,5 ,,, w, 3,,',1,0)
 */
 
+DROP FUNCTION SPLIT
+GO
 CREATE FUNCTION SPLIT
 (
   @s nvarchar(max),

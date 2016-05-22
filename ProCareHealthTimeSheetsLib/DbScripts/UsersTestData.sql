@@ -143,8 +143,12 @@ AS TestData (UserName, Email, FirstName, LastName)
 GO
 
 INSERT INTO Users (UserName, Email, FirstName, LastName, Code)
-SELECT CAST([Num] AS VARCHAR)+UserName, Email, FirstName, LastName, 'U00'+CAST([Num] AS VARCHAR)
-FROM #Users u LEFT JOIN Users AS eu ON eu.UserName = u.UserName
+SELECT 
+	CASE
+		WHEN eu.UserName IS NULL THEN u.UserName
+		ELSE CAST(u.[Num] AS VARCHAR)+u.UserName
+	END AS UserName, u.Email, u.FirstName, u.LastName, 'U00'+CAST(u.[Num] AS VARCHAR)
+FROM #Users u LEFT JOIN #Users AS eu ON eu.UserName = u.UserName AND u.Num > eu.Num
 GO
 
 DELETE FROM Users WHERE Email = 'nad2000@gmail.com'
@@ -176,3 +180,18 @@ FROM Users AS u JOIN Companies AS c
 	-- OR c.Id = (u.Id % (SELECT MAX(Id) FROM Companies) )
 ORDER BY u.Id
 */
+
+DECLARE @UserName VARCHAR
+DECLARE UserNames CURSOR LOCAL FOR SELECT UserName FROM Users
+
+OPEN UserNames
+FETCH NEXT FROM UserNames into @UserName
+WHILE @@FETCH_STATUS = 0
+BEGIN
+    EXECUTE dbo.createAppUser @UserName, '12345'
+    FETCH NEXT FROM UserNames into @UserName
+END
+
+CLOSE UserNames
+DEALLOCATE UserNames
+GO

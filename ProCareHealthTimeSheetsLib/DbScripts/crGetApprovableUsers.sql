@@ -14,7 +14,7 @@ SELECT u.Id, u.Email, u.FullName, u.UserName
 	-- ,u.CompanyWorkingFor_Id, c.Code AS CompanyCode, c.Name AS CompanyName
 FROM dbo.Users AS u
 	JOIN dbo.Companies AS c ON c.Id = u.CompanyWorkingFor_Id
-	JOIN dbo.UserCompany AS uc ON uc.Companies_Id = c.Id
+	JOIN dbo.UserCompany AS uc ON uc.CompanyId = c.Id
 WHERE uc.UsersVerifyingTimeSheets_Id = dbo.UserIdByName( @UserName )
 ORDER BY u.FirstName, u.LastName
 GO

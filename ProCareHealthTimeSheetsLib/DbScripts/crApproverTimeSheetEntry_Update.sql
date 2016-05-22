@@ -1,12 +1,11 @@
 USE TimeSheetDB
 
--- CREATE PROC dbo.ApproverTimeSheetEntry_Update AS
-GO
-
 -- NB!!!
 SET ANSI_NULLS OFF
 GO
-ALTER PROC dbo.ApproverTimeSheetEntry_Update
+DROP PROC dbo.ApproverTimeSheetEntry_Update
+GO
+CREATE PROC dbo.ApproverTimeSheetEntry_Update
   @Id INT,
   @Date DATE,
   @StartedAt TIME,
@@ -40,7 +39,6 @@ BEGIN
     SET @Id = SCOPE_IDENTITY()
 END
 IF @Id IS NULL RETURN
-
 
 UPDATE dbo.[TimeSheetEntries]
 SET

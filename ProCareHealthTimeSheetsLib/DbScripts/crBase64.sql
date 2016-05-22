@@ -7,6 +7,8 @@ GO
   but you can create them easily enough by leveraging the XML functionality.
 */
 
+DROP FUNCTION [dbo].[base64_encode]
+GO
 CREATE FUNCTION [dbo].[base64_encode] (@data VARBINARY(max)) RETURNS VARCHAR(max)
 WITH SCHEMABINDING, RETURNS NULL ON NULL INPUT
 BEGIN
@@ -22,6 +24,8 @@ GO
 SQL Server 2005 does not provide specific functions for Base64 encoding / decoding,
 but you can create them easily enough by leveraging the XML functionality.
 */
+DROP FUNCTION [dbo].[base64_decode]
+GO
 CREATE FUNCTION [dbo].[base64_decode] (@base64_text VARCHAR(max)) RETURNS VARBINARY(max)
 WITH SCHEMABINDING, RETURNS NULL ON NULL INPUT
 BEGIN

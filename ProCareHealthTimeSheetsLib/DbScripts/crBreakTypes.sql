@@ -6,9 +6,6 @@ SET QUOTED_IDENTIFIER ON
 GO
 
 ALTER TABLE [dbo].[TimeSheetEntries]
-DROP CONSTRAINT [FK_BreakTypesTimeSheetEntry]
-GO
-ALTER TABLE [dbo].[TimeSheetEntries]
 DROP CONSTRAINT [FK_TimeSheetEntries_BreakTypes]
 GO
 
@@ -58,13 +55,12 @@ ELSE h_str+' hrs '
 END
 + CASE m WHEN 0 THEN '' ELSE m_str+' min' END
 FROM
-( SELECT
-h,
-m,
-h*60+m AS interval,
-CAST ( h as varchar(1000)) h_str,
-CAST ( m as varchar(1000)) m_str
-FROM ( VALUES (0),(15),(30),(45) ) AS MinVals(m),
+(
+	SELECT h, m, h*60+m AS interval,
+	CAST ( h as varchar(1000)) h_str,
+	CAST ( m as varchar(1000)) m_str
+	FROM ( VALUES (0),(15),(30),(45)
+) AS MinVals(m),
 ( VALUES (0),(1),(2),(3),(4) ) AS HrVals(h)) AS breaks
 LEFT JOIN dbo.BreakTypes AS bt ON bt.TimeValue = breaks.interval
 WHERE bt.Id IS NULL AND m+h <> 0

@@ -5,7 +5,7 @@ GO
 DROP FUNCTION dbo.WeekEndingDates
 GO
 -- SELECT * FROM dbo.WeekEndingDates(DEFAULT)
-CREATE FUNCTION dbo.WeekEndingDates( @Count TINYINT = 10 )
+CREATE FUNCTION dbo.WeekEndingDates(@Count TINYINT=10)
 RETURNS @WeekEndings TABLE (WeekEndingDate DATE)
 AS
 BEGIN
@@ -26,14 +26,13 @@ GO
 DROP PROC dbo.GetWeekEndingDates
 GO
 -- CREATE PROC dbo.GetWeekEndingDates
-CREATE PROC dbo.GetWeekEndingDates( @Count TINYINT = 10 )
+CREATE PROC dbo.GetWeekEndingDates(@Count TINYINT=10)
 AS
-SELECT WeekEndingDate FROM dbo.WeekEndingDates(@Count)
+SELECT WeekEndingDate 
+FROM dbo.WeekEndingDates(@Count)
 GO
 
 DROP FUNCTION dbo.ThisWeekEndingDate
-GO
-CREATE FUNCTION dbo.ThisWeekEndingDate()
 GO
 -- Test: SELECT dbo.ThisWeekEndingDate()
 -- Actually - the last week ending date :)
@@ -50,8 +49,8 @@ GO
 /*
 SELECT DATEPART( WEEKDAY, dbo.to_nz_date(GETDATE()))
 SELECT DATEPART( WEEKDAY, GETDATE()), GETDATE(), cast(  dbo.to_nz_datetime(GETDATE()) as date)
-*/
 GO
+*/
 
 DROP FUNCTION dbo.LastWeekEndingDate
 GO

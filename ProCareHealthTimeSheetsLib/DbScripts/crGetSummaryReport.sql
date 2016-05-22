@@ -1,7 +1,10 @@
 USE [TimeSheetDB]
 GO
--- CREATE PROC dbo.GetTimeSheetSummary AS
-ALTER PROCEDURE dbo.GetTimeSheetSummary (
+
+DROP PROC dbo.GetTimeSheetSummary
+GO
+
+CREATE PROCEDURE dbo.GetTimeSheetSummary (
 	@ReportRequestedBy_Id INT = NULL, -- User requesting report
 	@DateFrom DATE = NULL,
 	@DateTo DATE = NULL,
@@ -16,7 +19,8 @@ IF @DateTo IS NULL
 
 SELECT
 	u.Id,
-	u.Name,
+	u.FullName,
+	u.FullName AS Name,
     @DateFrom AS StartDate,
     @DateTo AS EndDate,    
 	s.ApprovedTotalTime,

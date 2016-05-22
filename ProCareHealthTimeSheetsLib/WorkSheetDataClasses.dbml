@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TimeSheetDB" Class="WorkSheetDataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=TimeSheetDB;Integrated Security=True;MultipleActiveResultSets=True" SettingsObjectName="SoftwareAssociates.ProCareHealth.Properties.Settings" SettingsPropertyName="MainSqlConnection" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=TimeSheetDB;Integrated Security=True;Connect Timeout=30" SettingsObjectName="SoftwareAssociates.ProCareHealth.Properties.Settings" SettingsPropertyName="MainSqlConnection" Provider="System.Data.SqlClient" />
   <Table Name="dbo.WeekDays" Member="WeekDays">
     <Type Name="WeekDay">
-      <Column Name="WeekDay" Member="WeekDay1" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="WeekDay" Member="WeekDayNo" Storage="_WeekDay1" Type="System.Byte" DbType="TinyInt NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
       <Column Name="CurrentWeekDayDate" Type="System.DateTime" DbType="Date" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
       <Column Name="WeekDayName" Type="System.String" DbType="NVarChar(30)" IsDbGenerated="true" CanBeNull="true" UpdateCheck="Never" />
     </Type>
@@ -12,15 +12,15 @@
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="Code" Type="System.String" DbType="VarChar(10) NOT NULL" CanBeNull="false" />
       <Column Name="Name" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
-      <Association Name="Company_UserCompany" Member="UserCompanies" ThisKey="Id" OtherKey="Companies_Id" Type="UserCompany" />
+      <Association Name="Company_UserCompany" Member="UserCompanies" ThisKey="Id" OtherKey="CompanyId" Type="UserCompany" />
       <Association Name="Company_User" Member="Users" ThisKey="Id" OtherKey="CompanyWorkingFor_Id" Type="User" />
     </Type>
   </Table>
   <Table Name="dbo.UserCompany" Member="UserCompanies">
     <Type Name="UserCompany">
       <Column Name="UsersVerifyingTimeSheets_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Companies_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Association Name="Company_UserCompany" Member="Company" ThisKey="Companies_Id" OtherKey="Id" Type="Company" IsForeignKey="true" />
+      <Column Name="Companies_Id" Member="CompanyId" Storage="_Companies_Id" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="Company_UserCompany" Member="Company" ThisKey="CompanyId" OtherKey="Id" Type="Company" IsForeignKey="true" />
       <Association Name="User_UserCompany" Member="User" ThisKey="UsersVerifyingTimeSheets_Id" OtherKey="Id" Type="User" IsForeignKey="true" />
     </Type>
   </Table>
