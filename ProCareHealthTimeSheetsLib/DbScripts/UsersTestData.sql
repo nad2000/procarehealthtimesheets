@@ -173,7 +173,7 @@ GO
 -- Assinge the companies the users can approve timesheets for:
 /*DELETE FROM dbo.UserCompany
 GO
-INSERT INTO dbo.UserCompany (UsersVerifyingTimeSheets_Id, Companies_Id)
+INSERT INTO dbo.UserCompany (UsersVerifyingTimeSheets_Id, CompanyId)
 SELECT DISTINCT u.Id, c.Id
 FROM Users AS u JOIN Companies AS c
 	ON c.Id % 21 = (u.Id % (SELECT MAX(Id) FROM Companies) ) % 21
@@ -181,14 +181,19 @@ FROM Users AS u JOIN Companies AS c
 ORDER BY u.Id
 */
 
-DECLARE @UserName VARCHAR
-DECLARE UserNames CURSOR LOCAL FOR SELECT UserName FROM Users
+
+DECLARE @UserName VARCHAR(100)
+DECLARE UserNames CURSOR LOCAL FOR SELECT LOWER(UserName) AS UserName FROM Users
 
 OPEN UserNames
-FETCH NEXT FROM UserNames into @UserName
+FETCH NEXT FROM UserNames INTO @UserName
 WHILE @@FETCH_STATUS = 0
 BEGIN
+    PRINT '*** ' + @UserName
     EXECUTE dbo.createAppUser @UserName, '12345'
+	EXECUTE aspnet_UsersInRoles_AddUsersToRoles '/', @UserName, 'Employees', NULL
+	-- EXEC aspnet_UsersInRoles_AddUsersToRoles '/', 'user0', 'Administrators', NULL
+	-- EXEC aspnet_UsersInRoles_AddUsersToRoles '/', 'user0', 'Approvers', NULL
     FETCH NEXT FROM UserNames into @UserName
 END
 

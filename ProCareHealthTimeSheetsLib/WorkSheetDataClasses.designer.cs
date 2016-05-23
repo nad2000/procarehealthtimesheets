@@ -501,7 +501,7 @@ namespace SoftwareAssociates.ProCareHealth
 		
 		private int _UsersVerifyingTimeSheets_Id;
 		
-		private int _Companies_Id;
+		private int _CompanyId;
 		
 		private EntityRef<Company> _Company;
 		
@@ -548,20 +548,20 @@ namespace SoftwareAssociates.ProCareHealth
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="Companies_Id", Storage="_Companies_Id", DbType="Int NOT NULL", IsPrimaryKey=true)]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Name="CompanyId", Storage="_CompanyId", DbType="Int NOT NULL", IsPrimaryKey=true)]
 		public int CompanyId
 		{
 			get
 			{
-				return this._Companies_Id;
+				return this._CompanyId;
 			}
 			set
 			{
-				if ((this._Companies_Id != value))
+				if ((this._CompanyId != value))
 				{
 					this.OnCompanyIdChanging(value);
 					this.SendPropertyChanging();
-					this._Companies_Id = value;
+					this._CompanyId = value;
 					this.SendPropertyChanged("CompanyId");
 					this.OnCompanyIdChanged();
 				}
@@ -591,11 +591,11 @@ namespace SoftwareAssociates.ProCareHealth
 					if ((value != null))
 					{
 						value.UserCompanies.Add(this);
-						this._Companies_Id = value.Id;
+						this._CompanyId = value.Id;
 					}
 					else
 					{
-						this._Companies_Id = default(int);
+						this._CompanyId = default(int);
 					}
 					this.SendPropertyChanged("Company");
 				}

@@ -164,12 +164,12 @@
         SelectCommand="SELECT c.Id, c.Code, c.Name,
 CAST (
 CASE 
-	WHEN uc.Companies_Id IS NULL THEN 0
+	WHEN uc.CompanyId IS NULL THEN 0
 	ELSE 1
 END AS BIT ) AS Assigned
 FROM dbo.Companies AS c
 LEFT JOIN dbo.UserCompany AS uc
-    ON uc.Companies_Id = c.Id
+    ON uc.CompanyId = c.Id
 	    AND (uc.UsersVerifyingTimeSheets_Id = @Id)
 ORDER BY c.Name">
         <SelectParameters>

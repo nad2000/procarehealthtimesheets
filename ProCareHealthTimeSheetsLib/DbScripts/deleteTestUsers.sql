@@ -1239,7 +1239,7 @@ GO
 
 ALTER TABLE [dbo].[UserCompany]  DROP CONSTRAINT [FK_UserCompany_Company]
 GO
-ALTER TABLE [dbo].[UserCompany]  WITH CHECK ADD  CONSTRAINT [FK_UserCompany_Company] FOREIGN KEY([Companies_Id])
+ALTER TABLE [dbo].[UserCompany]  WITH CHECK ADD  CONSTRAINT [FK_UserCompany_Company] FOREIGN KEY([CompanyId])
 REFERENCES [dbo].[Companies] ([Id])
 ON DELETE CASCADE
 GO
