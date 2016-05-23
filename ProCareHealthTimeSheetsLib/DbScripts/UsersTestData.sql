@@ -13,6 +13,9 @@ FROM (VALUES
 ('user0', 'user0@nowhere.com','Test', 'User0'),
 ('user1', 'user1@nowhere.com','Test', 'User1'),
 ('user2', 'user2@nowhere.com','Test', 'User2'),
+('admin0', 'admin0@nowhere.com','Test', 'Admin0'),
+('admin1', 'admin1@nowhere.com','Test', 'Admin1'),
+('admin2', 'admin2@nowhere.com','Test', 'Admin2'),
 ('tristique', 'tristique@luctusutpellentesque.com','Hilda', 'Herman'),
 ('augue', 'augue.malesuada.malesuada@vehicula.org','Cairo', 'Hardy'),
 ('Duis.sit', 'Duis.sit@nec.edu','Martha', 'Hewitt'),
@@ -134,11 +137,21 @@ BEGIN
     PRINT '*** ' + @UserName
     EXECUTE dbo.createAppUser @UserName, '12345'
 	EXECUTE aspnet_UsersInRoles_AddUsersToRoles '/', @UserName, 'Employees', NULL
-	-- EXEC aspnet_UsersInRoles_AddUsersToRoles '/', 'user0', 'Administrators', NULL
-	-- EXEC aspnet_UsersInRoles_AddUsersToRoles '/', 'user0', 'Approvers', NULL
+	IF @UserName LIKE 'admin%' BEGIN
+		EXEC aspnet_UsersInRoles_AddUsersToRoles '/', @UserName, 'Administrators', NULL
+		EXEC aspnet_UsersInRoles_AddUsersToRoles '/', @UserName, 'Approvers', NULL
+	END
     FETCH NEXT FROM UserNames into @UserName
 END
 
 CLOSE UserNames
 DEALLOCATE UserNames
+GO
+
+-- Make admin users as approvers of the timesheets:
+INSERT INTO UserCompany
+SELECT u.Id, c.Id
+FROM (SELECT Id FROM Users WHERE UserName LIKE 'admin%') AS u CROSS JOIN Companies AS c
+  LEFT JOIN UserCompany AS uc ON uc.UsersVerifyingTimeSheets_Id = u.Id AND uc.CompanyId = c.Id
+WHERE uc.CompanyId IS NULL OR uc.UsersVerifyingTimeSheets_Id IS NULL
 GO
