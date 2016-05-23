@@ -33,6 +33,7 @@ CREATE TABLE [dbo].[Users]
     [FirstName] NVARCHAR(100) NOT NULL,
     [LastName] NVARCHAR(100) NOT NULL,
     [FullName] AS [FirstName] + ' ' + [LastName],
+	[Name] AS [FirstName] + ' ' + [LastName],
     [UserName] NVARCHAR(256) NOT NULL,
 	[Code] VARCHAR(10) NULL,
 	[LoweredUserName] AS LOWER(UserName),

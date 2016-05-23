@@ -1,4 +1,3 @@
--- NB! change the DB name!
 USE TimeSheetDB
 GO
 
@@ -23,9 +22,17 @@ BEGIN
 END
 GO
 
+DROP PROC dbo.GetWeekBeginningDates
+GO
+-- TEST: EXEC GetWeekBeginningDates
+CREATE PROC dbo.GetWeekBeginningDates(@Count TINYINT=10)
+AS
+SELECT DATEADD( DAY, -7, WeekEndingDate) AS WeekBeginningDate
+FROM dbo.WeekEndingDates(@Count)
+GO
+
 DROP PROC dbo.GetWeekEndingDates
 GO
--- CREATE PROC dbo.GetWeekEndingDates
 CREATE PROC dbo.GetWeekEndingDates(@Count TINYINT=10)
 AS
 SELECT WeekEndingDate 

@@ -164,6 +164,7 @@ SELECT Id, Email, CompanyWorkingFor_Id, UserName, LoweredUserName, Code, FirstNa
               <Mapping SourceColumn="FirstName" DataSetColumn="FirstName" />
               <Mapping SourceColumn="LastName" DataSetColumn="LastName" />
               <Mapping SourceColumn="FullName" DataSetColumn="FullName" />
+              <Mapping SourceColumn="Name" DataSetColumn="Name" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -313,7 +314,7 @@ SELECT Id, Code, Name, TimeValue, AlternativeCode FROM BreakTypes WHERE (Id = @I
   <xs:element name="TimeSheetDataSet" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="TimeSheetDataSet" msprop:Generator_UserDSName="TimeSheetDataSet">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="GetFullTimeSheetRecords" msprop:Generator_TableClassName="GetFullTimeSheetRecordsDataTable" msprop:Generator_TableVarName="tableGetFullTimeSheetRecords" msprop:Generator_TablePropName="GetFullTimeSheetRecords" msprop:Generator_RowDeletingName="GetFullTimeSheetRecordsRowDeleting" msprop:Generator_UserTableName="GetFullTimeSheetRecords" msprop:Generator_RowChangingName="GetFullTimeSheetRecordsRowChanging" msprop:Generator_RowEvHandlerName="GetFullTimeSheetRecordsRowChangeEventHandler" msprop:Generator_RowDeletedName="GetFullTimeSheetRecordsRowDeleted" msprop:Generator_RowEvArgName="GetFullTimeSheetRecordsRowChangeEvent" msprop:Generator_RowChangedName="GetFullTimeSheetRecordsRowChanged" msprop:Generator_RowClassName="GetFullTimeSheetRecordsRow">
+        <xs:element name="GetFullTimeSheetRecords" msprop:Generator_TableClassName="GetFullTimeSheetRecordsDataTable" msprop:Generator_TableVarName="tableGetFullTimeSheetRecords" msprop:Generator_RowChangedName="GetFullTimeSheetRecordsRowChanged" msprop:Generator_TablePropName="GetFullTimeSheetRecords" msprop:Generator_RowDeletingName="GetFullTimeSheetRecordsRowDeleting" msprop:Generator_RowChangingName="GetFullTimeSheetRecordsRowChanging" msprop:Generator_RowEvHandlerName="GetFullTimeSheetRecordsRowChangeEventHandler" msprop:Generator_RowDeletedName="GetFullTimeSheetRecordsRowDeleted" msprop:Generator_RowClassName="GetFullTimeSheetRecordsRow" msprop:Generator_UserTableName="GetFullTimeSheetRecords" msprop:Generator_RowEvArgName="GetFullTimeSheetRecordsRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -362,21 +363,21 @@ SELECT Id, Code, Name, TimeValue, AlternativeCode FROM BreakTypes WHERE (Id = @I
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WeekBeginningDates" msprop:Generator_TableClassName="WeekBeginningDatesDataTable" msprop:Generator_TableVarName="tableWeekBeginningDates" msprop:Generator_TablePropName="WeekBeginningDates" msprop:Generator_RowDeletingName="WeekBeginningDatesRowDeleting" msprop:Generator_UserTableName="WeekBeginningDates" msprop:Generator_RowChangingName="WeekBeginningDatesRowChanging" msprop:Generator_RowEvHandlerName="WeekBeginningDatesRowChangeEventHandler" msprop:Generator_RowDeletedName="WeekBeginningDatesRowDeleted" msprop:Generator_RowEvArgName="WeekBeginningDatesRowChangeEvent" msprop:Generator_RowChangedName="WeekBeginningDatesRowChanged" msprop:Generator_RowClassName="WeekBeginningDatesRow">
+        <xs:element name="WeekBeginningDates" msprop:Generator_TableClassName="WeekBeginningDatesDataTable" msprop:Generator_TableVarName="tableWeekBeginningDates" msprop:Generator_RowChangedName="WeekBeginningDatesRowChanged" msprop:Generator_TablePropName="WeekBeginningDates" msprop:Generator_RowDeletingName="WeekBeginningDatesRowDeleting" msprop:Generator_RowChangingName="WeekBeginningDatesRowChanging" msprop:Generator_RowEvHandlerName="WeekBeginningDatesRowChangeEventHandler" msprop:Generator_RowDeletedName="WeekBeginningDatesRowDeleted" msprop:Generator_RowClassName="WeekBeginningDatesRow" msprop:Generator_UserTableName="WeekBeginningDates" msprop:Generator_RowEvArgName="WeekBeginningDatesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="WeekBeginningDate" msprop:Generator_ColumnVarNameInTable="columnWeekBeginningDate" msprop:Generator_ColumnPropNameInRow="WeekBeginningDate" msprop:Generator_ColumnPropNameInTable="WeekBeginningDateColumn" msprop:Generator_UserColumnName="WeekBeginningDate" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="WeekEndingDates" msprop:Generator_TableClassName="WeekEndingDatesDataTable" msprop:Generator_TableVarName="tableWeekEndingDates" msprop:Generator_TablePropName="WeekEndingDates" msprop:Generator_RowDeletingName="WeekEndingDatesRowDeleting" msprop:Generator_UserTableName="WeekEndingDates" msprop:Generator_RowChangingName="WeekEndingDatesRowChanging" msprop:Generator_RowEvHandlerName="WeekEndingDatesRowChangeEventHandler" msprop:Generator_RowDeletedName="WeekEndingDatesRowDeleted" msprop:Generator_RowEvArgName="WeekEndingDatesRowChangeEvent" msprop:Generator_RowChangedName="WeekEndingDatesRowChanged" msprop:Generator_RowClassName="WeekEndingDatesRow">
+        <xs:element name="WeekEndingDates" msprop:Generator_TableClassName="WeekEndingDatesDataTable" msprop:Generator_TableVarName="tableWeekEndingDates" msprop:Generator_RowChangedName="WeekEndingDatesRowChanged" msprop:Generator_TablePropName="WeekEndingDates" msprop:Generator_RowDeletingName="WeekEndingDatesRowDeleting" msprop:Generator_RowChangingName="WeekEndingDatesRowChanging" msprop:Generator_RowEvHandlerName="WeekEndingDatesRowChangeEventHandler" msprop:Generator_RowDeletedName="WeekEndingDatesRowDeleted" msprop:Generator_RowClassName="WeekEndingDatesRow" msprop:Generator_UserTableName="WeekEndingDates" msprop:Generator_RowEvArgName="WeekEndingDatesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="WeekEndingDate" msprop:Generator_ColumnVarNameInTable="columnWeekEndingDate" msprop:Generator_ColumnPropNameInRow="WeekEndingDate" msprop:Generator_ColumnPropNameInTable="WeekEndingDateColumn" msprop:Generator_UserColumnName="WeekEndingDate" type="xs:dateTime" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Users" msprop:Generator_TableClassName="UsersDataTable" msprop:Generator_TableVarName="tableUsers" msprop:Generator_TablePropName="Users" msprop:Generator_RowDeletingName="UsersRowDeleting" msprop:Generator_UserTableName="Users" msprop:Generator_RowChangingName="UsersRowChanging" msprop:Generator_RowEvHandlerName="UsersRowChangeEventHandler" msprop:Generator_RowDeletedName="UsersRowDeleted" msprop:Generator_RowEvArgName="UsersRowChangeEvent" msprop:Generator_RowChangedName="UsersRowChanged" msprop:Generator_RowClassName="UsersRow">
+        <xs:element name="Users" msprop:Generator_TableClassName="UsersDataTable" msprop:Generator_TableVarName="tableUsers" msprop:Generator_RowChangedName="UsersRowChanged" msprop:Generator_TablePropName="Users" msprop:Generator_RowDeletingName="UsersRowDeleting" msprop:Generator_RowChangingName="UsersRowChanging" msprop:Generator_RowEvHandlerName="UsersRowChangeEventHandler" msprop:Generator_RowDeletedName="UsersRowDeleted" msprop:Generator_RowClassName="UsersRow" msprop:Generator_UserTableName="Users" msprop:Generator_RowEvArgName="UsersRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -430,10 +431,11 @@ SELECT Id, Code, Name, TimeValue, AlternativeCode FROM BreakTypes WHERE (Id = @I
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="Name" msprop:Generator_ColumnVarNameInTable="columnName" msprop:Generator_ColumnPropNameInRow="Name" msprop:Generator_ColumnPropNameInTable="NameColumn" msprop:Generator_UserColumnName="Name" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Companies" msprop:Generator_TableClassName="CompaniesDataTable" msprop:Generator_TableVarName="tableCompanies" msprop:Generator_TablePropName="Companies" msprop:Generator_RowDeletingName="CompaniesRowDeleting" msprop:Generator_UserTableName="Companies" msprop:Generator_RowChangingName="CompaniesRowChanging" msprop:Generator_RowEvHandlerName="CompaniesRowChangeEventHandler" msprop:Generator_RowDeletedName="CompaniesRowDeleted" msprop:Generator_RowEvArgName="CompaniesRowChangeEvent" msprop:Generator_RowChangedName="CompaniesRowChanged" msprop:Generator_RowClassName="CompaniesRow">
+        <xs:element name="Companies" msprop:Generator_TableClassName="CompaniesDataTable" msprop:Generator_TableVarName="tableCompanies" msprop:Generator_RowChangedName="CompaniesRowChanged" msprop:Generator_TablePropName="Companies" msprop:Generator_RowDeletingName="CompaniesRowDeleting" msprop:Generator_RowChangingName="CompaniesRowChanging" msprop:Generator_RowEvHandlerName="CompaniesRowChangeEventHandler" msprop:Generator_RowDeletedName="CompaniesRowDeleted" msprop:Generator_RowClassName="CompaniesRow" msprop:Generator_UserTableName="Companies" msprop:Generator_RowEvArgName="CompaniesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -454,7 +456,7 @@ SELECT Id, Code, Name, TimeValue, AlternativeCode FROM BreakTypes WHERE (Id = @I
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="BreakTypes" msprop:Generator_TableClassName="BreakTypesDataTable" msprop:Generator_TableVarName="tableBreakTypes" msprop:Generator_TablePropName="BreakTypes" msprop:Generator_RowDeletingName="BreakTypesRowDeleting" msprop:Generator_UserTableName="BreakTypes" msprop:Generator_RowChangingName="BreakTypesRowChanging" msprop:Generator_RowEvHandlerName="BreakTypesRowChangeEventHandler" msprop:Generator_RowDeletedName="BreakTypesRowDeleted" msprop:Generator_RowEvArgName="BreakTypesRowChangeEvent" msprop:Generator_RowChangedName="BreakTypesRowChanged" msprop:Generator_RowClassName="BreakTypesRow">
+        <xs:element name="BreakTypes" msprop:Generator_TableClassName="BreakTypesDataTable" msprop:Generator_TableVarName="tableBreakTypes" msprop:Generator_RowChangedName="BreakTypesRowChanged" msprop:Generator_TablePropName="BreakTypes" msprop:Generator_RowDeletingName="BreakTypesRowDeleting" msprop:Generator_RowChangingName="BreakTypesRowChanging" msprop:Generator_RowEvHandlerName="BreakTypesRowChangeEventHandler" msprop:Generator_RowDeletedName="BreakTypesRowDeleted" msprop:Generator_RowClassName="BreakTypesRow" msprop:Generator_UserTableName="BreakTypes" msprop:Generator_RowEvArgName="BreakTypesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:short" />
@@ -483,7 +485,7 @@ SELECT Id, Code, Name, TimeValue, AlternativeCode FROM BreakTypes WHERE (Id = @I
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="GetUserAssignedCompanies" msprop:Generator_TableClassName="GetUserAssignedCompaniesDataTable" msprop:Generator_TableVarName="tableGetUserAssignedCompanies" msprop:Generator_TablePropName="GetUserAssignedCompanies" msprop:Generator_RowDeletingName="GetUserAssignedCompaniesRowDeleting" msprop:Generator_UserTableName="GetUserAssignedCompanies" msprop:Generator_RowChangingName="GetUserAssignedCompaniesRowChanging" msprop:Generator_RowEvHandlerName="GetUserAssignedCompaniesRowChangeEventHandler" msprop:Generator_RowDeletedName="GetUserAssignedCompaniesRowDeleted" msprop:Generator_RowEvArgName="GetUserAssignedCompaniesRowChangeEvent" msprop:Generator_RowChangedName="GetUserAssignedCompaniesRowChanged" msprop:Generator_RowClassName="GetUserAssignedCompaniesRow">
+        <xs:element name="GetUserAssignedCompanies" msprop:Generator_TableClassName="GetUserAssignedCompaniesDataTable" msprop:Generator_TableVarName="tableGetUserAssignedCompanies" msprop:Generator_RowChangedName="GetUserAssignedCompaniesRowChanged" msprop:Generator_TablePropName="GetUserAssignedCompanies" msprop:Generator_RowDeletingName="GetUserAssignedCompaniesRowDeleting" msprop:Generator_RowChangingName="GetUserAssignedCompaniesRowChanging" msprop:Generator_RowEvHandlerName="GetUserAssignedCompaniesRowChangeEventHandler" msprop:Generator_RowDeletedName="GetUserAssignedCompaniesRowDeleted" msprop:Generator_RowClassName="GetUserAssignedCompaniesRow" msprop:Generator_UserTableName="GetUserAssignedCompanies" msprop:Generator_RowEvArgName="GetUserAssignedCompaniesRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msprop:Generator_ColumnVarNameInTable="columnId" msprop:Generator_ColumnPropNameInRow="Id" msprop:Generator_ColumnPropNameInTable="IdColumn" msprop:Generator_UserColumnName="Id" type="xs:int" />
@@ -526,7 +528,7 @@ SELECT Id, Code, Name, TimeValue, AlternativeCode FROM BreakTypes WHERE (Id = @I
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="FK_CompanyUser" msdata:parent="Companies" msdata:child="Users" msdata:parentkey="Id" msdata:childkey="CompanyWorkingFor_Id" msprop:Generator_UserChildTable="Users" msprop:Generator_ChildPropName="GetUsersRows" msprop:Generator_UserParentTable="Companies" msprop:Generator_UserRelationName="FK_CompanyUser" msprop:Generator_RelationVarName="relationFK_CompanyUser" msprop:Generator_ParentPropName="CompaniesRow" />
+      <msdata:Relationship name="FK_CompanyUser" msdata:parent="Companies" msdata:child="Users" msdata:parentkey="Id" msdata:childkey="CompanyWorkingFor_Id" msprop:Generator_UserChildTable="Users" msprop:Generator_ChildPropName="GetUsersRows" msprop:Generator_UserRelationName="FK_CompanyUser" msprop:Generator_ParentPropName="CompaniesRow" msprop:Generator_RelationVarName="relationFK_CompanyUser" msprop:Generator_UserParentTable="Companies" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>
