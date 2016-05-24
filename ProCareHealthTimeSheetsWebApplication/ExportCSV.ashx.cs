@@ -21,11 +21,14 @@ namespace SoftwareAssociates.ProCareHealth
             //context.Response.Buffer = context.Response.BufferOutput = true;
             //context.Response.ClearContent();
 
+            var res = context.Response;
+            var req = context.Request;
+
             WorkSheetDataClassesDataContext db = new WorkSheetDataClassesDataContext();
             int? companyId = 
-                String.IsNullOrEmpty( context.Request.QueryString["CompanyId"] ) ?
+                String.IsNullOrEmpty( req.QueryString["CompanyId"] ) ?
                     null
-                    : (int?)Convert.ToInt32(context.Request.QueryString["CompanyId"]);
+                    : (int?)Convert.ToInt32(req.QueryString["CompanyId"]);
             string companyCode;
             if (companyId == null) companyCode = "";
             else {
@@ -35,39 +38,46 @@ namespace SoftwareAssociates.ProCareHealth
 
             string fileName = String.Format(
                 "TimeSheetSummary" + (String.IsNullOrEmpty(companyCode) ? "" : ("_" + companyCode )) + "_{0:yyyy'-'MM'-'dd}_{1:yyyy'-'MM'-'dd}",
-                    Convert.ToDateTime(context.Request.QueryString["DateFrom"]),
-                    Convert.ToDateTime(context.Request.QueryString["DateTo"]));
+                    Convert.ToDateTime(req.QueryString["DateFrom"]),
+                    Convert.ToDateTime(req.QueryString["DateTo"]));
 
-            context.Response.AddHeader("content-disposition", "attachment;filename=" + fileName + ".xls");
+            res.AddHeader("content-disposition", "attachment;filename=" + fileName + ".xls");
             context.Response.ContentType = "application/vnd.ms-excel";
 
-            DateTime? dateFrom =  String.IsNullOrEmpty( context.Request.QueryString["DateFrom"] ) ?
-                null : (DateTime?)DateTime.Parse(context.Request.QueryString["DateFrom"]);
-            DateTime? dateTo =  String.IsNullOrEmpty( context.Request.QueryString["DateTo"] ) ?
-                null : (DateTime?)DateTime.Parse(context.Request.QueryString["DateTo"]);
-            Boolean? includeUnapproved = (Boolean?)(String.IsNullOrEmpty(context.Request.QueryString["IncludeUnapproved"]) ?
-                false : (context.Request.QueryString["IncludeUnapproved"].ToLower() == "yes"));
+            DateTime? dateFrom =  String.IsNullOrEmpty(req.QueryString["DateFrom"] ) ?
+                null : (DateTime?)DateTime.Parse(req.QueryString["DateFrom"]);
+            DateTime? dateTo =  String.IsNullOrEmpty(req.QueryString["DateTo"] ) ?
+                null : (DateTime?)DateTime.Parse(req.QueryString["DateTo"]);
+            Boolean? includeUnapproved = (Boolean?)(String.IsNullOrEmpty(req.QueryString["IncludeUnapproved"]) ?
+                false : (req.QueryString["IncludeUnapproved"].ToLower() == "yes"));
 
 
             GetFullTimeSheetRecordsTableAdapter da = new GetFullTimeSheetRecordsTableAdapter();
             TimeSheetDataSet.GetFullTimeSheetRecordsDataTable dt =
                 da.GetData( null, dateFrom, dateTo, includeUnapproved, companyId, null );
 
-            context.Response.Write("Company\tCode\tFullName\tDate\tStartedAt\tEndedAt\tBreak\tTotalTime\tApproved\tComment\n");
-
+            var delimiter = "\t";
+            res.Write(
+                string.Join(
+                    delimiter, 
+                    new string[] { "Company", "Code", "FullName", "Date", "StartedAt", "EndedAt", "Break", "TotalTime", "Approved", "Comment" }
+                ));
+            res.Write("\n");
             foreach (TimeSheetDataSet.GetFullTimeSheetRecordsRow  dr in dt.Rows)
             {
-                context.Response.Write(
-                    dr["CompanyCode"].ToString() + "\t"
-                    + ( dr["Code"] is DBNull ? "" : dr.Code ) + "\t"
-                    + dr.FullName+"\t"
-                    + dr.Date.ToString("d")+"\t"
-                    + dr.StartedAt.ToString("hh':'mm")+"\t"
-                    + dr.EndedAt.ToString("hh':'mm")+"\t"
-                    + ( dr["BreakTypeName"] is DBNull ? "" : dr.BreakTypeName ) + "\t"
-                    + ( dr.TotalTime/60 ).ToString()+":"+( dr.TotalTime%60 ).ToString("00") + "\t"
-                    + ( dr["IsApproved"] is DBNull ? "" : ( dr.IsApproved ? "yes" : "no" ) ) + "\t"
-                    + ( dr["IsApproved"] is DBNull ? "" : dr.Comment ) + "\n" );
+                res.Write(
+                    string.Join(delimiter, new string[] {
+                        dr["CompanyCode"].ToString(),
+                        ( dr["Code"] is DBNull ? "" : dr.Code ),
+                        dr.FullName,
+                        dr.Date.ToString("d"),
+                        dr.StartedAt.ToString("hh':'mm"),
+                        dr.EndedAt.ToString("hh':'mm"),
+                        ( dr["BreakTypeName"] is DBNull ? "" : dr.BreakTypeName ),
+                        ( dr.TotalTime/60 ).ToString()+":"+( dr.TotalTime%60 ).ToString("00"),
+                        ( dr["IsApproved"] is DBNull ? "" : ( dr.IsApproved ? "yes" : "no" ) ),
+                        ( dr["IsApproved"] is DBNull ? "" : dr.Comment )}));
+                res.Write("\n");
             }
         }
 
