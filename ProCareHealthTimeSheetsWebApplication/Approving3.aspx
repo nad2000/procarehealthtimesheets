@@ -1,22 +1,30 @@
-﻿<%@ Page Title="Approving" Language="C#" MasterPageFile="~/Site.master" 
-    AutoEventWireup="True" 
-    CodeBehind="Approving3.aspx.cs" 
+<%@ Page Title="Approving" Language="C#" MasterPageFile="~/Site.master"
+    AutoEventWireup="True"
+    CodeBehind="Approving3.aspx.cs"
     Inherits="SoftwareAssociates.ProCareHealth.Approving3" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="HeadContent" runat="server">
+<script type="text/javascript" language="javascript">
+function CheckAllEntries(Checkbox) {
+    var TimeSheetGridView = document.getElementById("<%=TimeSheetGridView.ClientID %>");
+    for (i = 1; i < TimeSheetGridView.rows.length; i++) {
+        TimeSheetGridView.rows[i].cells[7].getElementsByTagName("INPUT")[0].checked = Checkbox.checked;
+    }
+}
+</script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
-    Week Ending: 
-    <asp:DropDownList ID="WeekEndingDropDownList" runat="server" 
-        AutoPostBack="True" DataSourceID="WeekEndingDateSource" 
-        DataTextField="WeekEndingDate" DataValueField="WeekEndingDate" 
-        DataTextFormatString="{0:d}" 
-        onselectedindexchanged="WeekEndingDropDownList_SelectedIndexChanged" 
+    Week Ending:
+    <asp:DropDownList ID="WeekEndingDropDownList" runat="server"
+        AutoPostBack="True" DataSourceID="WeekEndingDateSource"
+        DataTextField="WeekEndingDate" DataValueField="WeekEndingDate"
+        DataTextFormatString="{0:d}"
+        onselectedindexchanged="WeekEndingDropDownList_SelectedIndexChanged"
         ondatabound="WeekEndingDropDownList_DataBound">
     </asp:DropDownList>
-    <asp:SqlDataSource ID="WeekEndingDateSource" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:SoftwareAssociates.ProCareHealth.Properties.Settings.MainSqlConnection %>" 
+    <asp:SqlDataSource ID="WeekEndingDateSource" runat="server"
+        ConnectionString="<%$ ConnectionStrings:SoftwareAssociates.ProCareHealth.Properties.Settings.MainSqlConnection %>"
         DataSourceMode="DataReader" EnableViewState="False"
         CacheExpirationPolicy="Absolute"
         CacheDuration="43200"
@@ -26,34 +34,34 @@
         </SelectParameters>
     </asp:SqlDataSource>
 
-    <asp:DropDownList runat="server" ID="ApprovableUserDropDownList" 
-        AutoPostBack="True" DataSourceID="ApprovableUsersSource" DataTextField="FullName" 
-        DataValueField="UserName" 
-        onselectedindexchanged="ApprovableUserDropDownList_SelectedIndexChanged" 
+    <asp:DropDownList runat="server" ID="ApprovableUserDropDownList"
+        AutoPostBack="True" DataSourceID="ApprovableUsersSource" DataTextField="FullName"
+        DataValueField="UserName"
+        onselectedindexchanged="ApprovableUserDropDownList_SelectedIndexChanged"
         ondatabound="ApprovableUserDropDownList_DataBound" />
 
-    <%-- 
-    <asp:Button ID="ThisWeekButton" runat="server" Text="This Week" Enabled="false" 
+    <%--
+    <asp:Button ID="ThisWeekButton" runat="server" Text="This Week" Enabled="false"
         onclick="WeekButton_Click" />
-    <asp:Button ID="LastWeekButton" runat="server" Text="Last Week" 
+    <asp:Button ID="LastWeekButton" runat="server" Text="Last Week"
         onclick="WeekButton_Click" />
     --%>
 
     <asp:GridView ID="TimeSheetGridView"
         runat="server"
-        AutoGenerateColumns="False" 
-        DataSourceID="TimeSheetSource" 
+        AutoGenerateColumns="False"
+        DataSourceID="TimeSheetSource"
         onrowdatabound="TimeSheetGridView_RowDataBound"
         ShowFooter="True"
         RowHeaderColumn="Date" DataMember="DefaultView"
-        GridLines="None"  
-        CssClass="mGrid"  
-        PagerStyle-CssClass="pgr"  
-        AlternatingRowStyle-CssClass="alt" 
+        GridLines="None"
+        CssClass="mGrid"
+        PagerStyle-CssClass="pgr"
+        AlternatingRowStyle-CssClass="alt"
         SelectedRowStyle-CssClass="selected"
-        onrowediting="TimeSheetGridView_RowEditing" 
+        onrowediting="TimeSheetGridView_RowEditing"
         DataKeyNames="Date"
-        EnablePersistedSelection="True" 
+        EnablePersistedSelection="True"
         ondatabinding="TimeSheetGridView_DataBinding">
 <AlternatingRowStyle CssClass="alt"></AlternatingRowStyle>
         <Columns>
@@ -73,9 +81,9 @@
             </asp:TemplateField>
 <asp:TemplateField HeaderText="Started At">
 <ItemTemplate>
-    <asp:TextBox ID="StartedAtTextBox" runat="server" 
+    <asp:TextBox ID="StartedAtTextBox" runat="server"
         Text='<%# Bind("StartedAt", "{0:hh\:mm}") %>' MaxLength="5"></asp:TextBox>
-    <asp:MaskedEditExtender ID="StartedAtMaskedEditExtender" runat="server" 
+    <asp:MaskedEditExtender ID="StartedAtMaskedEditExtender" runat="server"
         TargetControlID="StartedAtTextBox"
         Mask="99:99"
         MaskType="Time"
@@ -83,7 +91,7 @@
         AcceptAMPM="false"
         AutoComplete="true"
         AutoCompleteValue="07:00" />
-    <asp:MaskedEditValidator ID="StartedAtMaskedEditValidator" runat="server" 
+    <asp:MaskedEditValidator ID="StartedAtMaskedEditValidator" runat="server"
         ControlToValidate="StartedAtTextBox"
         ControlExtender="StartedAtMaskedEditExtender" Display="Dynamic" />
 </ItemTemplate>
@@ -91,7 +99,7 @@
 <asp:TemplateField HeaderText="Ended At">
 <ItemTemplate>
         <asp:TextBox ID="EndedAtTextBox" runat="server" Text='<%# Bind("EndedAt", "{0:hh\:mm}") %>'  MaxLength="5"></asp:TextBox>
-        <asp:MaskedEditExtender ID="EndedAtMaskedEditExtender" runat="server" 
+        <asp:MaskedEditExtender ID="EndedAtMaskedEditExtender" runat="server"
             TargetControlID="EndedAtTextBox"
             Mask="99:99"
             MaskType="Time"
@@ -100,15 +108,15 @@
             AutoComplete="true"
             AutoCompleteValue="18:00" >
         </asp:MaskedEditExtender>
-    <asp:MaskedEditValidator ID="EndedAtMaskedEditValidator" runat="server" 
+    <asp:MaskedEditValidator ID="EndedAtMaskedEditValidator" runat="server"
         ControlToValidate="EndedAtTextBox"
         ControlExtender="EndedAtMaskedEditExtender" Display="Dynamic" />
 </ItemTemplate>
 </asp:TemplateField>
             <asp:TemplateField HeaderText="Break">
                 <ItemTemplate>
-                    <asp:DropDownList ID="BreakTypeDropDownList" runat="server" 
-                        AppendDataBoundItems="True" DataSourceID="BreakTypeSource" DataTextField="Name" 
+                    <asp:DropDownList ID="BreakTypeDropDownList" runat="server"
+                        AppendDataBoundItems="True" DataSourceID="BreakTypeSource" DataTextField="Name"
                         DataValueField="Id" SelectedValue='<%# Bind("Break_Id") %>'>
                         <asp:ListItem></asp:ListItem>
                     </asp:DropDownList>
@@ -116,21 +124,25 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Total Time" >
                 <ItemTemplate>
-                    <asp:Label ID="TotalTimeLabel" runat="server" 
+                    <asp:Label ID="TotalTimeLabel" runat="server"
                         Text='<%# TotalTimeFormated( Eval("TotalTime"))  %>'></asp:Label>
                 </ItemTemplate>
                 <FooterTemplate>
                     <asp:Label ID="SumOfTotalTimeLabel" runat="server"></asp:Label>
                 </FooterTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="Approved">
+            <asp:TemplateField>
+                <HeaderTemplate>
+                    Approved<asp:CheckBox ID="chkboxSelectAll" runat="server" onclick="CheckAllEntries(this);" />
+                </HeaderTemplate>
+                <ItemStyle HorizontalAlign="Center" VerticalAlign="Middle" />
                 <ItemTemplate>
                     <asp:CheckBox ID="IsApprovedCheckBox" runat="server" Checked='<%# Bind("IsApproved") %>' Enabled="true" />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Comment">
                 <ItemTemplate>
-                    <asp:TextBox ID="CommentTextBox" runat="server" Text='<%# Bind("Comment") %>'></asp:TextBox>
+                    <asp:TextBox Width="95%" ID="CommentTextBox" runat="server" Text='<%# Bind("Comment") %>'></asp:TextBox>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
@@ -141,28 +153,28 @@
     </asp:GridView>
 
     <asp:SqlDataSource
-        ID="ApprovableUsersSource" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:SoftwareAssociates.ProCareHealth.Properties.Settings.MainSqlConnection %>" 
+        ID="ApprovableUsersSource" runat="server"
+        ConnectionString="<%$ ConnectionStrings:SoftwareAssociates.ProCareHealth.Properties.Settings.MainSqlConnection %>"
         SelectCommand="GetApprovableUsers" SelectCommandType="StoredProcedure">
         <SelectParameters>
             <asp:SessionParameter Name="UserName" SessionField="UserName" Type="String" />
         </SelectParameters>
     </asp:SqlDataSource>
-    <%--asp:LinqDataSource ID="ApprovableUsersSource" runat="server" 
-        ContextTypeName="SoftwareAssociates.ProCareHealth.WorkSheetDataClassesDataContext" 
-        onselecting="ApprovableUsersSource_Selecting" AutoPage="False" 
+    <%--asp:LinqDataSource ID="ApprovableUsersSource" runat="server"
+        ContextTypeName="SoftwareAssociates.ProCareHealth.WorkSheetDataClassesDataContext"
+        onselecting="ApprovableUsersSource_Selecting" AutoPage="False"
         OrderBy="FullName" EnableObjectTracking="False" EntityTypeName="User" TableName="Users" >
     </asp:LinqDataSource--%>
 
-    <asp:SqlDataSource ID="TimeSheetSource" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:SoftwareAssociates.ProCareHealth.Properties.Settings.MainSqlConnection %>" 
-        SelectCommand="GetUserTimeSheetEntries" 
-        SelectCommandType="StoredProcedure" 
-        UpdateCommand="ApproverTimeSheetEntry_Update" 
+    <asp:SqlDataSource ID="TimeSheetSource" runat="server"
+        ConnectionString="<%$ ConnectionStrings:SoftwareAssociates.ProCareHealth.Properties.Settings.MainSqlConnection %>"
+        SelectCommand="GetUserTimeSheetEntries"
+        SelectCommandType="StoredProcedure"
+        UpdateCommand="ApproverTimeSheetEntry_Update"
         UpdateCommandType="StoredProcedure">
         <SelectParameters>
-            <asp:ControlParameter ControlID="ApprovableUserDropDownList" 
-                DefaultValue="UserName" Name="UserName" PropertyName="SelectedValue" 
+            <asp:ControlParameter ControlID="ApprovableUserDropDownList"
+                DefaultValue="UserName" Name="UserName" PropertyName="SelectedValue"
                 Type="String" />
             <asp:ControlParameter ControlID="WeekEndingDropDownList" Type="DateTime"
                 Name="WeekEndingDate" PropertyName="SelectedValue" />
@@ -177,15 +189,15 @@
             <asp:Parameter Name="IsApproved" Type="Boolean" />
             <asp:Parameter Name="Comment" Type="String" />
             <asp:SessionParameter Name="VerifiedBy_Id" Type="Int32" SessionField="UserId"  />
-            <asp:ControlParameter ControlID="ApprovableUserDropDownList" 
+            <asp:ControlParameter ControlID="ApprovableUserDropDownList"
                 Name="ReportedBy_UserName" PropertyName="SelectedValue" Type="String" />
             <asp:Parameter Direction="ReturnValue" Name="RETURN_VALUE" Type="Int32" />
         </UpdateParameters>
     </asp:SqlDataSource>
-    <asp:SqlDataSource ID="BreakTypeSource" runat="server" 
-        ConnectionString="<%$ ConnectionStrings:SoftwareAssociates.ProCareHealth.Properties.Settings.MainSqlConnection %>" 
+    <asp:SqlDataSource ID="BreakTypeSource" runat="server"
+        ConnectionString="<%$ ConnectionStrings:SoftwareAssociates.ProCareHealth.Properties.Settings.MainSqlConnection %>"
         SelectCommand="SELECT [Id], [Name] FROM [BreakTypes] ORDER BY [TimeValue]">
     </asp:SqlDataSource>
-    <asp:Button ID="SaveButton" runat="server" Text="Save" 
+    <asp:Button ID="SaveButton" runat="server" Text="Save"
         onclick="SaveButton_Click" />
 </asp:Content>
